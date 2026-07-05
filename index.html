@@ -1,1973 +1,1904 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Cosy & Comfy Concept Store — Grand Baie, Mauritius</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Booking Manager - Trou aux Biches, Mauritius</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         :root {
-            --cream: #F7F0E3;
-            --linen: #EDE0CB;
-            --sand: #D9C4A0;
-            --sand-dk: #C4A87A;
-            --terra: #B8673A;
-            --terra-dk: #9A4F2A;
-            --terra-lt: #D4845A;
-            --bark: #3E2A18;
-            --bark-lt: #5C3D24;
-            --moss: #4A5C3A;
-            --moss-dk: #3B4A2E;
-            --moss-lt: #6B7F57;
-            --white: #FDFAF5;
-            --white-pure: #FFFFFF;
-            --gold: #C4A060;
-            --gold-lt: #D4B87A;
-            --shadow-sm: 0 2px 12px rgba(62, 42, 24, 0.06);
-            --shadow-md: 0 8px 32px rgba(62, 42, 24, 0.10);
-            --shadow-lg: 0 20px 56px rgba(62, 42, 24, 0.14);
-            --shadow-xl: 0 28px 72px rgba(62, 42, 24, 0.18);
-            --radius-sm: 3px;
-            --radius: 6px;
-            --radius-lg: 12px;
-            --transition: 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-            --transition-fast: 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+            --bg-primary: #f5f7fa;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --text-primary: #1a1d23;
+            --text-secondary: #5f6b7a;
+            --text-muted: #8b95a5;
+            --border-color: #e8ecf1;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --nav-bg: #ffffff;
+            --card-header-bg: #f9fafb;
+            --input-bg: #ffffff;
+            --input-border: #d1d5db;
+            --table-stripe: #f9fafb;
+            --modal-overlay: rgba(0, 0, 0, 0.5);
+            --badge-soft-bg: #f0f4ff;
+            --toast-bg: #ffffff;
+            --calendar-today: #2563eb;
+            --calendar-other-month: #d1d5db;
         }
 
-        html {
-            scroll-behavior: smooth;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+        .dark-mode {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #1e293b;
+            --text-primary: #e2e8f0;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+            --nav-bg: #1e293b;
+            --card-header-bg: #253349;
+            --input-bg: #1e293b;
+            --input-border: #475569;
+            --table-stripe: #253349;
+            --modal-overlay: rgba(0, 0, 0, 0.7);
+            --badge-soft-bg: #1e3a5f;
+            --toast-bg: #1e293b;
+            --calendar-today: #3b82f6;
+            --calendar-other-month: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         body {
-            font-family: 'Jost', sans-serif;
-            background: var(--cream);
-            color: var(--bark);
-            overflow-x: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
             line-height: 1.6;
-            font-weight: 400;
-            letter-spacing: 0.01em;
         }
 
-        /* ── NAVIGATION ─────────────────────────── */
-        nav {
+        /* Navbar */
+        .navbar-custom {
+            background: var(--nav-bg);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+            padding: 0.5rem 1rem;
+            backdrop-filter: blur(10px);
+        }
+        .navbar-brand-custom {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--accent) !important;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .navbar-brand-custom i {
+            font-size: 1.5rem;
+        }
+        .nav-tabs-custom {
+            display: flex;
+            gap: 0.25rem;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .nav-tabs-custom::-webkit-scrollbar {
+            display: none;
+        }
+        .nav-tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 0.6rem 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .nav-tab-btn:hover {
+            background: var(--badge-soft-bg);
+            color: var(--accent);
+        }
+        .nav-tab-btn.active {
+            background: var(--accent);
+            color: #ffffff;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
+        }
+        .nav-tab-btn i {
+            font-size: 1.1rem;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+        .theme-toggle:hover {
+            background: var(--badge-soft-bg);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Notification Bell */
+        .notif-bell {
+            position: relative;
+            background: transparent;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: var(--text-primary);
+            padding: 0.3rem;
+            transition: color 0.2s ease;
+        }
+        .notif-bell:hover {
+            color: var(--accent);
+        }
+        .notif-badge {
+            position: absolute;
+            top: -4px;
+            right: -6px;
+            background: var(--danger);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse-badge 2s infinite;
+        }
+        @keyframes pulse-badge {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.25);
+            }
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 1.5rem 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .tab-pane-custom {
+            display: none;
+            animation: fadeSlideIn 0.4s ease;
+        }
+        .tab-pane-custom.active {
+            display: block;
+        }
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Dashboard Cards */
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.25rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            cursor: default;
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        .stat-card .stat-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+        }
+        .stat-card .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .stat-card .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .icon-blue {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+        .icon-green {
+            background: #ecfdf5;
+            color: #10b981;
+        }
+        .icon-red {
+            background: #fef2f2;
+            color: #ef4444;
+        }
+        .icon-orange {
+            background: #fffbeb;
+            color: #f59e0b;
+        }
+        .icon-purple {
+            background: #f5f3ff;
+            color: #7c3aed;
+        }
+        .icon-teal {
+            background: #f0fdfa;
+            color: #14b8a6;
+        }
+        .icon-indigo {
+            background: #eef2ff;
+            color: #4f46e5;
+        }
+        .dark-mode .icon-blue {
+            background: #1e3a5f;
+        }
+        .dark-mode .icon-green {
+            background: #1a3d2f;
+        }
+        .dark-mode .icon-red {
+            background: #3d1f1f;
+        }
+        .dark-mode .icon-orange {
+            background: #3d2f1a;
+        }
+        .dark-mode .icon-purple {
+            background: #2d1f3d;
+        }
+        .dark-mode .icon-teal {
+            background: #1a3d35;
+        }
+        .dark-mode .icon-indigo {
+            background: #1f2d4d;
+        }
+
+        /* Studio Cards */
+        .studio-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.25rem;
+            border: 2px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .studio-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        .studio-card.available {
+            border-color: #10b981;
+            background: linear-gradient(135deg, var(--bg-card) 60%, #ecfdf5);
+        }
+        .studio-card.occupied {
+            border-color: #ef4444;
+            background: linear-gradient(135deg, var(--bg-card) 60%, #fef2f2);
+        }
+        .studio-card.arriving {
+            border-color: #f59e0b;
+            background: linear-gradient(135deg, var(--bg-card) 60%, #fffbeb);
+        }
+        .studio-card.departing {
+            border-color: #3b82f6;
+            background: linear-gradient(135deg, var(--bg-card) 60%, #eff6ff);
+        }
+        .dark-mode .studio-card.available {
+            background: linear-gradient(135deg, var(--bg-card) 60%, #1a3d2f);
+        }
+        .dark-mode .studio-card.occupied {
+            background: linear-gradient(135deg, var(--bg-card) 60%, #3d1f1f);
+        }
+        .dark-mode .studio-card.arriving {
+            background: linear-gradient(135deg, var(--bg-card) 60%, #3d2f1a);
+        }
+        .dark-mode .studio-card.departing {
+            background: linear-gradient(135deg, var(--bg-card) 60%, #1e3a5f);
+        }
+        .studio-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1;
+        }
+        .studio-status-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge-available {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .badge-occupied {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .badge-arriving {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .badge-departing {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        /* Table */
+        .table-custom {
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+        .table-custom th {
+            background: var(--card-header-bg);
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            border-bottom: 2px solid var(--border-color);
+            white-space: nowrap;
+        }
+        .table-custom td {
+            vertical-align: middle;
+            font-size: 0.9rem;
+        }
+        .table-custom tbody tr {
+            transition: background 0.2s ease;
+        }
+        .table-custom tbody tr:hover {
+            background: var(--table-stripe);
+        }
+
+        /* Buttons */
+        .btn-custom-primary {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 0.55rem 1.2rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+        }
+        .btn-custom-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
+            color: #fff;
+        }
+        .btn-custom-sm {
+            padding: 0.3rem 0.7rem;
+            font-size: 0.8rem;
+            border-radius: 8px;
+        }
+
+        /* Toast */
+        .toast-custom {
+            background: var(--toast-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Modal */
+        .modal-content-custom {
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-lg);
+        }
+        .modal-header-custom {
+            border-bottom: 1px solid var(--border-color);
+            background: var(--card-header-bg);
+            border-radius: 16px 16px 0 0;
+        }
+
+        /* Calendar */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+        .calendar-day-header {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            padding: 0.5rem 0;
+        }
+        .calendar-day {
+            aspect-ratio: 1;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.85rem;
+            position: relative;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+            background: var(--bg-card);
+            min-width: 36px;
+        }
+        .calendar-day:hover {
+            border-color: var(--accent);
+            background: var(--badge-soft-bg);
+        }
+        .calendar-day.today {
+            border-color: var(--calendar-today);
+            font-weight: 700;
+        }
+        .calendar-day.other-month {
+            color: var(--calendar-other-month);
+            pointer-events: none;
+        }
+        .calendar-day .booking-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 6px;
+        }
+        .dot-pending {
+            background: #f59e0b;
+        }
+        .dot-confirmed {
+            background: #3b82f6;
+        }
+        .dot-checked-in {
+            background: #10b981;
+        }
+        .dot-checked-out {
+            background: #6b7280;
+        }
+        .dot-cancelled {
+            background: #ef4444;
+        }
+
+        /* Print */
+        @media print {
+            body {
+                background: #fff !important;
+                color: #000 !important;
+            }
+            .navbar-custom,
+            .no-print,
+            .theme-toggle,
+            .notif-bell,
+            .btn,
+            .nav-tabs-custom,
+            footer .text-muted {
+                display: none !important;
+            }
+            .main-content {
+                padding: 0 !important;
+                max-width: 100% !important;
+            }
+            .stat-card,
+            .studio-card,
+            .table-custom {
+                box-shadow: none !important;
+                border: 1px solid #ccc !important;
+                break-inside: avoid;
+            }
+            .tab-pane-custom {
+                display: block !important;
+                page-break-before: always;
+            }
+            .tab-pane-custom:first-of-type {
+                page-break-before: auto;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar-brand-custom span {
+                font-size: 0.95rem;
+            }
+            .nav-tab-btn {
+                padding: 0.45rem 0.7rem;
+                font-size: 0.78rem;
+                border-radius: 8px;
+            }
+            .nav-tab-btn i {
+                font-size: 0.95rem;
+            }
+            .stat-card {
+                padding: 1rem;
+            }
+            .stat-card .stat-value {
+                font-size: 1.4rem;
+            }
+            .studio-card {
+                min-height: 150px;
+                padding: 1rem;
+            }
+            .studio-number {
+                font-size: 1.8rem;
+            }
+            .calendar-day {
+                font-size: 0.7rem;
+                border-radius: 6px;
+            }
+        }
+        @media (max-width: 480px) {
+            .nav-tabs-custom {
+                gap: 0.1rem;
+            }
+            .nav-tab-btn {
+                padding: 0.35rem 0.5rem;
+                font-size: 0.7rem;
+                border-radius: 6px;
+            }
+            .nav-tab-btn i {
+                font-size: 0.8rem;
+            }
+            .stat-card .stat-value {
+                font-size: 1.2rem;
+            }
+            .stat-card .stat-label {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Loading Spinner */
+        .spinner-overlay {
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 18px 64px;
-            background: rgba(247, 240, 227, 0.9);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(62, 42, 24, 0.06);
-            transition: padding 0.35s cubic-bezier(0.22, 1, 0.36, 1), background 0.35s;
-        }
-        nav.scrolled {
-            padding: 10px 64px;
-            background: rgba(247, 240, 227, 0.96);
-            box-shadow: var(--shadow-sm);
-        }
-        .nav-logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            color: var(--bark);
-            text-decoration: none;
-            transition: opacity 0.25s;
-        }
-        .nav-logo:hover {
-            opacity: 0.78;
-        }
-        .nav-logo span {
-            color: var(--terra);
-            font-weight: 400;
-        }
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-            align-items: center;
-        }
-        .nav-links a {
-            font-size: 0.78rem;
-            letter-spacing: 0.13em;
-            text-transform: uppercase;
-            color: var(--bark);
-            text-decoration: none;
-            font-weight: 500;
-            position: relative;
-            padding-bottom: 3px;
-            transition: color 0.25s;
-        }
-        .nav-links a:hover {
-            color: var(--terra);
-        }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 1.5px;
-            background: var(--terra);
-            transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        .nav-cta {
-            background: var(--terra) !important;
-            color: var(--white) !important;
-            padding: 11px 26px !important;
-            border-radius: var(--radius-sm) !important;
-            font-size: 0.74rem !important;
-            letter-spacing: 0.15em !important;
-            text-decoration: none;
-            transition: background 0.25s, transform 0.2s !important;
-            font-weight: 600 !important;
-        }
-        .nav-cta:hover {
-            background: var(--bark) !important;
-            transform: translateY(-1px);
-        }
-        .nav-cta::after {
-            display: none !important;
-        }
-        .nav-mobile-toggle {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 8px;
-            color: var(--bark);
-        }
-        .nav-mobile-toggle span {
-            display: block;
-            width: 26px;
-            height: 2px;
-            background: var(--bark);
-            margin: 6px 0;
-            border-radius: 1px;
-            transition: 0.3s;
-        }
-
-        /* ── HERO ────────────────────────────────── */
-        .hero {
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero-left {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 140px 64px 80px 80px;
-            position: relative;
-            z-index: 2;
-        }
-        .hero-tag {
-            font-size: 0.7rem;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: var(--terra);
-            font-weight: 600;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        .hero-tag::before {
-            content: '';
-            display: block;
-            width: 48px;
-            height: 1.5px;
-            background: var(--terra);
-        }
-        .hero-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(3.2rem, 5.5vw, 5.8rem);
-            font-weight: 300;
-            line-height: 1.06;
-            color: var(--bark);
-            margin-bottom: 24px;
-            letter-spacing: -0.01em;
-        }
-        .hero-title em {
-            font-style: italic;
-            color: var(--terra);
-            font-weight: 400;
-        }
-        .hero-desc {
-            font-size: 0.92rem;
-            line-height: 1.85;
-            color: rgba(62, 42, 24, 0.68);
-            max-width: 420px;
-            margin-bottom: 40px;
-            font-weight: 400;
-        }
-        .hero-btns {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-        .btn-primary {
-            background: var(--terra);
-            color: var(--white);
-            padding: 16px 38px;
-            font-size: 0.76rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            text-decoration: none;
-            font-family: 'Jost', sans-serif;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            border-radius: var(--radius-sm);
-            transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
-            display: inline-block;
-        }
-        .btn-primary:hover {
-            background: var(--bark);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-        .btn-outline {
-            border: 1.5px solid var(--bark);
-            color: var(--bark);
-            padding: 16px 38px;
-            font-size: 0.76rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            text-decoration: none;
-            font-family: 'Jost', sans-serif;
-            font-weight: 500;
-            background: transparent;
-            cursor: pointer;
-            border-radius: var(--radius-sm);
-            transition: all 0.25s;
-            display: inline-block;
-        }
-        .btn-outline:hover {
-            background: var(--bark);
-            color: var(--white);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .hero-right {
-            position: relative;
-            background: var(--linen);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .hero-pattern {
-            position: absolute;
-            inset: 0;
-            opacity: 0.05;
-            background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233E2A18'%3E%3Cpath d='M48 44v-6h-4v6h-6v4h6v6h4v-6h6v-4h-6zm0-40V0h-4v4h-6v4h6v6h4V8h6V4h-6zM8 44v-6H4v6H0v4h4v6h4v-6h6v-4H8zM8 4V0H4v4H0v4h4v6h4V8h6V4H8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            background-size: 80px 80px;
-        }
-        .hero-visual {
             width: 100%;
             height: 100%;
+            background: var(--bg-primary);
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            z-index: 2;
+            z-index: 9999;
+            transition: opacity 0.4s ease;
         }
-        .hero-centerpiece {
-            width: 360px;
-            height: 440px;
-            position: relative;
-            z-index: 2;
-        }
-        .hero-badge {
-            position: absolute;
-            bottom: 50px;
-            left: -30px;
-            z-index: 3;
-            background: var(--terra);
-            color: var(--white);
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Cormorant Garamond', serif;
-            animation: spin-slow 20s linear infinite;
-            box-shadow: var(--shadow-lg);
-        }
-        .hero-badge-inner {
-            text-align: center;
-            line-height: 1.2;
-        }
-        .hero-badge .big {
-            font-size: 1.8rem;
-            font-weight: 600;
-            display: block;
-        }
-        .hero-badge .small {
-            font-size: 0.56rem;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            opacity: 0.9;
-            font-family: 'Jost', sans-serif;
-        }
-        @keyframes spin-slow {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* ── MARQUEE ─────────────────────────────── */
-        .marquee-wrap {
-            background: var(--moss);
-            padding: 15px 0;
-            overflow: hidden;
-            white-space: nowrap;
-            position: relative;
-        }
-        .marquee-track {
-            display: inline-block;
-            animation: marquee 30s linear infinite;
-        }
-        .marquee-track span {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
-            font-style: italic;
-            color: var(--cream);
-            margin: 0 36px;
-            letter-spacing: 0.07em;
-        }
-        .marquee-dot {
-            color: var(--terra-lt);
-            margin: 0 6px;
-            font-style: normal;
-        }
-        @keyframes marquee {
-            from {
-                transform: translateX(0);
-            }
-            to {
-                transform: translateX(-50%);
-            }
-        }
-
-        /* ── SECTION BASE ────────────────────────── */
-        section {
-            padding: 100px 80px;
-        }
-        .section-tag {
-            font-size: 0.7rem;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: var(--terra);
-            font-weight: 600;
-            margin-bottom: 14px;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        .section-tag::before {
-            content: '';
-            display: block;
-            width: 32px;
-            height: 1.5px;
-            background: var(--terra);
-        }
-        .section-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.4rem, 3.8vw, 3.8rem);
-            font-weight: 300;
-            line-height: 1.1;
-            color: var(--bark);
-            margin-bottom: 18px;
-            letter-spacing: -0.01em;
-        }
-        .section-title em {
-            font-style: italic;
-            color: var(--terra);
-            font-weight: 400;
-        }
-
-        /* ── ABOUT ───────────────────────────────── */
-        #about {
-            background: var(--white);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-        .about-img {
-            position: relative;
-            height: 540px;
-        }
-        .about-img-main {
-            width: 78%;
-            height: 100%;
-            background: var(--linen);
-            border-radius: var(--radius);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--shadow-sm);
-        }
-        .about-img-accent {
-            position: absolute;
-            bottom: -24px;
-            right: 0;
-            width: 48%;
-            height: 44%;
-            background: var(--moss);
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--shadow-md);
-        }
-        .about-text p {
-            font-size: 0.92rem;
-            line-height: 1.9;
-            color: rgba(62, 42, 24, 0.68);
-            font-weight: 400;
-            margin-bottom: 18px;
-        }
-        .about-stats {
-            display: flex;
-            gap: 44px;
-            margin-top: 36px;
-            padding-top: 32px;
-            border-top: 1px solid var(--sand);
-        }
-        .stat-num {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3rem;
-            font-weight: 600;
-            color: var(--terra);
-            line-height: 1;
-        }
-        .stat-label {
-            font-size: 0.72rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: rgba(62, 42, 24, 0.5);
-            margin-top: 4px;
-            font-weight: 500;
-        }
-
-        /* ── PRODUCTS ────────────────────────────── */
-        #products {
-            background: var(--cream);
-        }
-        .products-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        .products-header .section-tag {
-            justify-content: center;
-        }
-        .products-header .section-tag::before {
-            display: none;
-        }
-        .products-header .section-tag::after {
-            content: '';
-            display: block;
-            width: 32px;
-            height: 1.5px;
-            background: var(--terra);
-        }
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-        .product-card {
-            background: var(--white);
-            border-radius: var(--radius);
-            overflow: hidden;
-            position: relative;
-            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(62, 42, 24, 0.04);
-        }
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-        }
-        .product-card.featured {
-            grid-column: span 2;
-        }
-        .product-img {
-            height: 280px;
-            background: var(--linen);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .product-card.featured .product-img {
-            height: 370px;
-        }
-        .product-img-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(62, 42, 24, 0);
-            transition: background 0.4s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .product-card:hover .product-img-overlay {
-            background: rgba(62, 42, 24, 0.22);
-        }
-        .product-quick-btn {
-            opacity: 0;
-            transform: translateY(16px);
-            background: var(--white);
-            color: var(--bark);
-            padding: 13px 30px;
-            font-size: 0.7rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            border: none;
-            cursor: pointer;
-            font-family: 'Jost', sans-serif;
-            font-weight: 600;
-            border-radius: var(--radius-sm);
-            transition: opacity 0.35s, transform 0.35s, background 0.25s;
-            box-shadow: var(--shadow-md);
-        }
-        .product-quick-btn:hover {
-            background: var(--bark);
-            color: var(--white);
-        }
-        .product-card:hover .product-quick-btn {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .product-tag-badge {
-            position: absolute;
-            top: 16px;
-            left: 16px;
-            background: var(--terra);
-            color: var(--white);
-            font-size: 0.6rem;
-            letter-spacing: 0.16em;
-            text-transform: uppercase;
-            padding: 6px 14px;
-            border-radius: 2px;
-            font-weight: 600;
-            z-index: 2;
-        }
-        .product-info {
-            padding: 26px 28px 30px;
-        }
-        .product-cat {
-            font-size: 0.66rem;
-            letter-spacing: 0.17em;
-            text-transform: uppercase;
-            color: var(--moss-lt);
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-        .product-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--bark);
-            margin-bottom: 6px;
-            line-height: 1.2;
-        }
-        .product-desc {
-            font-size: 0.8rem;
-            color: rgba(62, 42, 24, 0.55);
-            line-height: 1.7;
-            font-weight: 400;
-            margin-bottom: 14px;
-        }
-        .product-price {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--terra);
-        }
-        .product-price span {
-            font-family: 'Jost', sans-serif;
-            font-size: 0.7rem;
-            color: rgba(62, 42, 24, 0.4);
-            font-weight: 400;
-            margin-left: 4px;
-        }
-        .illus {
-            width: 100%;
-            height: 100%;
-        }
-
-        /* ── FEATURES ────────────────────────────── */
-        #features {
-            background: var(--bark);
-            color: var(--cream);
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0;
-            padding: 0;
-        }
-        .feature-item {
-            padding: 56px 40px;
-            border-right: 1px solid rgba(247, 240, 227, 0.07);
-            transition: background 0.35s;
-        }
-        .feature-item:last-child {
-            border-right: none;
-        }
-        .feature-item:hover {
-            background: rgba(247, 240, 227, 0.03);
-        }
-        .feature-icon {
-            width: 44px;
-            height: 44px;
-            margin-bottom: 22px;
-            color: var(--terra-lt);
-            opacity: 0.9;
-        }
-        .feature-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--cream);
-            margin-bottom: 10px;
-        }
-        .feature-desc {
-            font-size: 0.8rem;
-            line-height: 1.8;
-            color: rgba(247, 240, 227, 0.48);
-            font-weight: 400;
-        }
-
-        /* ── GALLERY ─────────────────────────────── */
-        #gallery {
-            background: var(--linen);
-            padding: 100px 80px;
-        }
-        .gallery-header {
-            margin-bottom: 44px;
-        }
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            grid-template-rows: 260px 260px;
-            gap: 16px;
-        }
-        .gal-item {
-            background: var(--cream);
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
-            box-shadow: var(--shadow-sm);
-            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s;
-        }
-        .gal-item:hover {
-            transform: scale(1.02);
-            box-shadow: var(--shadow-md);
-        }
-        .gal-item:first-child {
-            grid-row: span 2;
-        }
-        .gal-label {
-            position: absolute;
-            bottom: 14px;
-            left: 14px;
-            background: rgba(247, 240, 227, 0.9);
-            font-size: 0.68rem;
-            letter-spacing: 0.13em;
-            text-transform: uppercase;
-            color: var(--bark);
-            padding: 6px 15px;
-            border-radius: 2px;
-            font-weight: 500;
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-        }
-
-        /* ── TESTIMONIAL ─────────────────────────── */
-        #testimonials {
-            background: var(--white);
-            text-align: center;
-        }
-        .testimonials-inner {
-            max-width: 760px;
-            margin: 0 auto;
-        }
-        .quote-mark {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 9rem;
-            line-height: 0.45;
-            color: var(--sand);
-            margin-bottom: 20px;
-            display: block;
-        }
-        .quote-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.3rem, 2vw, 1.9rem);
-            font-style: italic;
-            font-weight: 300;
-            line-height: 1.55;
-            color: var(--bark);
-            margin-bottom: 28px;
-        }
-        .quote-author {
-            font-size: 0.74rem;
-            letter-spacing: 0.17em;
-            text-transform: uppercase;
-            color: var(--terra);
-            font-weight: 500;
-        }
-        .stars {
-            color: var(--terra);
-            font-size: 1rem;
-            margin-bottom: 18px;
-            letter-spacing: 4px;
-        }
-
-        /* ── CONTACT ─────────────────────────────── */
-        #contact {
-            background: var(--moss);
-            color: var(--cream);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: start;
-        }
-        #contact .section-tag {
-            color: var(--sand);
-        }
-        #contact .section-tag::before {
-            background: var(--sand);
-        }
-        #contact .section-title {
-            color: var(--cream);
-        }
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 26px;
-            margin-top: 36px;
-        }
-        .contact-row {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-        }
-        .contact-icon {
-            width: 42px;
-            height: 42px;
-            background: rgba(247, 240, 227, 0.08);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            color: var(--sand);
-        }
-        .contact-detail-label {
-            font-size: 0.66rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: rgba(247, 240, 227, 0.45);
-            margin-bottom: 3px;
-            font-weight: 500;
-        }
-        .contact-detail-value {
-            font-size: 0.92rem;
-            color: var(--cream);
-            font-weight: 400;
-        }
-        .contact-detail-value a {
-            color: inherit;
-            text-decoration: none;
-            transition: color 0.25s;
-        }
-        .contact-detail-value a:hover {
-            color: var(--sand);
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 7px;
-        }
-        .form-label {
-            font-size: 0.68rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: rgba(247, 240, 227, 0.55);
-            font-weight: 500;
-        }
-        .form-input {
-            background: rgba(247, 240, 227, 0.06);
-            border: 1.5px solid rgba(247, 240, 227, 0.12);
-            color: var(--cream);
-            padding: 14px 18px;
-            font-family: 'Jost', sans-serif;
-            font-size: 0.88rem;
-            font-weight: 400;
-            border-radius: var(--radius-sm);
-            outline: none;
-            transition: border-color 0.25s, background 0.25s;
-        }
-        .form-input::placeholder {
-            color: rgba(247, 240, 227, 0.25);
-        }
-        .form-input:focus {
-            border-color: var(--sand);
-            background: rgba(247, 240, 227, 0.1);
-        }
-        .form-textarea {
-            resize: vertical;
-            min-height: 130px;
-        }
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-        .btn-submit {
-            background: var(--terra);
-            color: var(--white);
-            padding: 15px 38px;
-            font-size: 0.76rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            border: none;
-            cursor: pointer;
-            font-family: 'Jost', sans-serif;
-            font-weight: 600;
-            align-self: flex-start;
-            border-radius: var(--radius-sm);
-            transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
-        }
-        .btn-submit:hover {
-            background: var(--bark);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        /* ── FOOTER ──────────────────────────────── */
-        footer {
-            background: var(--bark);
-            color: var(--cream);
-            padding: 60px 80px 32px;
-        }
-        .footer-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding-bottom: 44px;
-            border-bottom: 1px solid rgba(247, 240, 227, 0.08);
-            margin-bottom: 32px;
-        }
-        .footer-logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.9rem;
-            font-weight: 600;
-            color: var(--cream);
-            letter-spacing: 0.04em;
-        }
-        .footer-logo span {
-            color: var(--terra-lt);
-        }
-        .footer-tagline {
-            font-size: 0.78rem;
-            color: rgba(247, 240, 227, 0.38);
-            margin-top: 6px;
-            font-weight: 400;
-            letter-spacing: 0.05em;
-        }
-        .footer-links {
-            display: flex;
-            gap: 56px;
-        }
-        .footer-col h4 {
-            font-size: 0.66rem;
-            letter-spacing: 0.17em;
-            text-transform: uppercase;
-            color: rgba(247, 240, 227, 0.38);
-            margin-bottom: 18px;
-            font-weight: 600;
-        }
-        .footer-col ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .footer-col a {
-            font-size: 0.84rem;
-            color: rgba(247, 240, 227, 0.65);
-            text-decoration: none;
-            font-weight: 400;
-            transition: color 0.25s;
-        }
-        .footer-col a:hover {
-            color: var(--sand);
-        }
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .footer-copy {
-            font-size: 0.72rem;
-            color: rgba(247, 240, 227, 0.32);
-            font-weight: 400;
-        }
-        .social-links {
-            display: flex;
-            gap: 14px;
-        }
-        .social-link {
-            width: 38px;
-            height: 38px;
-            border: 1.5px solid rgba(247, 240, 227, 0.18);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(247, 240, 227, 0.5);
-            text-decoration: none;
-            font-size: 0.78rem;
-            font-weight: 500;
-            transition: all 0.25s;
-        }
-        .social-link:hover {
-            background: var(--terra);
-            border-color: var(--terra);
-            color: var(--white);
-            transform: translateY(-2px);
-        }
-
-        /* ── WHATSAPP FLOAT ──────────────────────── */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 28px;
-            right: 28px;
-            z-index: 2000;
-            width: 58px;
-            height: 58px;
-            background: #25D366;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 6px 28px rgba(37, 211, 102, 0.4);
-            text-decoration: none;
-            transition: transform 0.3s, box-shadow 0.3s;
-            animation: float-pulse 2.5s ease-in-out infinite;
-        }
-        @keyframes float-pulse {
-            0%,
-            100% {
-                box-shadow: 0 6px 28px rgba(37, 211, 102, 0.4);
-            }
-            50% {
-                box-shadow: 0 10px 40px rgba(37, 211, 102, 0.6);
-            }
-        }
-        .whatsapp-float:hover {
-            transform: scale(1.12);
-            box-shadow: 0 12px 44px rgba(37, 211, 102, 0.55);
-            animation: none;
-        }
-        .whatsapp-float svg {
-            width: 30px;
-            height: 30px;
-            fill: #fff;
-        }
-        .whatsapp-tooltip {
-            position: absolute;
-            right: 68px;
-            background: var(--bark);
-            color: var(--white);
-            padding: 8px 16px;
-            border-radius: 4px;
-            font-size: 0.72rem;
-            white-space: nowrap;
-            font-weight: 500;
-            letter-spacing: 0.06em;
+        .spinner-overlay.hidden {
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s;
-            box-shadow: var(--shadow-md);
-        }
-        .whatsapp-float:hover .whatsapp-tooltip {
-            opacity: 1;
-        }
-
-        /* ── ANIMATIONS ──────────────────────────── */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(36px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ── MOBILE ──────────────────────────────── */
-        @media (max-width: 1024px) {
-            nav {
-                padding: 16px 32px;
-            }
-            nav.scrolled {
-                padding: 10px 32px;
-            }
-            section {
-                padding: 64px 32px;
-            }
-            .hero {
-                grid-template-columns: 1fr;
-                min-height: auto;
-            }
-            .hero-left {
-                padding: 110px 32px 50px;
-            }
-            .hero-right {
-                height: 340px;
-            }
-            .hero-centerpiece {
-                width: 280px;
-                height: 360px;
-            }
-            .hero-badge {
-                width: 100px;
-                height: 100px;
-                bottom: 30px;
-                left: -20px;
-            }
-            .hero-badge .big {
-                font-size: 1.3rem;
-            }
-            .hero-badge .small {
-                font-size: 0.5rem;
-            }
-            #about {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            .about-img {
-                height: 360px;
-            }
-            .products-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .product-card.featured {
-                grid-column: span 2;
-            }
-            #features {
-                grid-template-columns: 1fr 1fr;
-            }
-            .feature-item {
-                border-right: none;
-                border-bottom: 1px solid rgba(247, 240, 227, 0.07);
-            }
-            .gallery-grid {
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: auto;
-            }
-            .gal-item:first-child {
-                grid-row: span 1;
-            }
-            #contact {
-                grid-template-columns: 1fr;
-                gap: 44px;
-            }
-            .footer-top {
-                flex-direction: column;
-                gap: 32px;
-            }
-            .footer-links {
-                flex-wrap: wrap;
-                gap: 28px;
-            }
-            .footer-bottom {
-                flex-direction: column;
-                gap: 18px;
-                text-align: center;
-            }
-        }
-        @media (max-width: 768px) {
-            nav {
-                padding: 14px 20px;
-            }
-            nav.scrolled {
-                padding: 10px 20px;
-            }
-            .nav-links {
-                display: none;
-            }
-            .nav-mobile-toggle {
-                display: block;
-            }
-            section {
-                padding: 48px 20px;
-            }
-            .hero-left {
-                padding: 100px 20px 40px;
-            }
-            .hero-right {
-                height: 260px;
-            }
-            .hero-centerpiece {
-                width: 220px;
-                height: 280px;
-            }
-            .hero-badge {
-                width: 80px;
-                height: 80px;
-                bottom: 20px;
-                left: -10px;
-            }
-            .hero-badge .big {
-                font-size: 1.1rem;
-            }
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-            .product-card.featured {
-                grid-column: span 1;
-            }
-            .product-card.featured .product-img {
-                height: 280px;
-            }
-            #features {
-                grid-template-columns: 1fr;
-            }
-            .feature-item {
-                border-right: none;
-                border-bottom: 1px solid rgba(247, 240, 227, 0.07);
-                padding: 40px 28px;
-            }
-            .feature-item:last-child {
-                border-bottom: none;
-            }
-            .gallery-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-            .footer-links {
-                flex-direction: column;
-                gap: 24px;
-            }
-            .whatsapp-float {
-                width: 50px;
-                height: 50px;
-                bottom: 20px;
-                right: 20px;
-            }
-            .whatsapp-float svg {
-                width: 26px;
-                height: 26px;
-            }
-            .whatsapp-tooltip {
-                display: none;
-            }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVIGATION -->
-    <nav id="navbar">
-        <a href="#" class="nav-logo">Cosy<span>&</span>Comfy</a>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#products">Products</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#contact" class="nav-cta">Contact Us</a></li>
-        </ul>
-        <button class="nav-mobile-toggle" aria-label="Toggle menu" onclick="toggleMobileMenu()">
-            <span></span><span></span><span></span>
-        </button>
+    <!-- Loading Spinner -->
+    <div class="spinner-overlay" id="spinnerOverlay">
+        <div class="text-center">
+            <div class="spinner-border text-primary mb-3" role="status" style="width:3rem;height:3rem;">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="text-muted fw-semibold">Loading Studio Booking Manager...</p>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index:9999;" id="toastContainer"></div>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar-custom d-flex align-items-center justify-content-between flex-wrap gap-2">
+        <a class="navbar-brand-custom text-decoration-none" href="#" onclick="switchTab('dashboard')">
+            <i class="bi bi-buildings"></i> <span>StudioBooking<span class="d-none d-sm-inline"> Manager</span></span>
+        </a>
+        <div class="nav-tabs-custom" id="navTabs">
+            <button class="nav-tab-btn active" data-tab="dashboard"><i class="bi bi-speedometer2"></i> <span class="d-none d-sm-inline">Dashboard</span></button>
+            <button class="nav-tab-btn" data-tab="bookings"><i class="bi bi-calendar-check"></i> <span class="d-none d-sm-inline">Bookings</span></button>
+            <button class="nav-tab-btn" data-tab="studios"><i class="bi bi-grid-3x3-gap"></i> <span class="d-none d-sm-inline">Studios</span></button>
+            <button class="nav-tab-btn" data-tab="calendar"><i class="bi bi-calendar-month"></i> <span class="d-none d-sm-inline">Calendar</span></button>
+            <button class="nav-tab-btn" data-tab="reports"><i class="bi bi-graph-up"></i> <span class="d-none d-sm-inline">Reports</span></button>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+            <button class="notif-bell" id="notifBell" title="Notifications" onclick="toggleNotifications()">
+                <i class="bi bi-bell"></i>
+                <span class="notif-badge" id="notifBadge" style="display:none;">0</span>
+            </button>
+            <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode" onclick="toggleTheme()">
+                <i class="bi bi-moon-stars" id="themeIcon"></i>
+            </button>
+        </div>
     </nav>
 
-    <!-- HERO -->
-    <section class="hero" id="home">
-        <div class="hero-left">
-            <div class="hero-tag">Bohemian & Balinese Living</div>
-            <h1 class="hero-title">
-                Transform Your<br/>Home Into a<br/><em>Sanctuary</em>
-            </h1>
-            <p class="hero-desc">
-                Handcrafted jute rugs, seagrass rugs, rattan furniture &amp; Balinese home decor — curated with love, delivered to your door in Mauritius.
-            </p>
-            <div class="hero-btns">
-                <a href="#products" class="btn-primary">Explore Collection</a>
-                <a href="https://wa.me/23057800485?text=Hello%20Cosy%20%26%20Comfy!%20I%20would%20like%20to%20know%20more%20about%20your%20products." target="_blank" rel="noopener" class="btn-outline">WhatsApp Us →</a>
+    <!-- Notifications Dropdown -->
+    <div class="position-fixed top-0 end-0 mt-5 pt-2 me-2" style="z-index:1040; display:none;" id="notifDropdown">
+        <div class="card shadow-lg border rounded-3 p-3" style="min-width:300px;max-width:95vw;background:var(--bg-card);">
+            <h6 class="fw-bold mb-2"><i class="bi bi-bell-fill me-1"></i> Notifications</h6>
+            <div id="notifList" class="small" style="max-height:250px;overflow-y:auto;">
+                <p class="text-muted mb-0">No notifications</p>
             </div>
-        </div>
-        <div class="hero-right">
-            <div class="hero-pattern"></div>
-            <div class="hero-visual">
-                <svg class="hero-centerpiece" viewBox="0 0 360 440" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <ellipse cx="180" cy="340" rx="140" ry="58" fill="#D9C4A0" opacity="0.55"/>
-                    <path d="M115 295 Q115 185 180 185 Q245 185 245 295 Z" fill="#C4A882" stroke="#8B6F47" stroke-width="2.2"/>
-                    <path d="M126 272 Q126 210 180 210 Q234 210 234 272" fill="#B8967A"/>
-                    <rect x="134" y="290" width="15" height="52" rx="5" fill="#7A5C38"/>
-                    <rect x="211" y="290" width="15" height="52" rx="5" fill="#7A5C38"/>
-                    <line x1="136" y1="230" x2="224" y2="230" stroke="#8B6F47" stroke-width="1.8" opacity="0.55"/>
-                    <line x1="131" y1="245" x2="229" y2="245" stroke="#8B6F47" stroke-width="1.8" opacity="0.5"/>
-                    <line x1="128" y1="260" x2="232" y2="260" stroke="#8B6F47" stroke-width="1.8" opacity="0.5"/>
-                    <line x1="128" y1="275" x2="232" y2="275" stroke="#8B6F47" stroke-width="1.5" opacity="0.4"/>
-                    <ellipse cx="180" cy="334" rx="128" ry="44" fill="#C4A060" opacity="0.65"/>
-                    <ellipse cx="180" cy="334" rx="106" ry="36" fill="none" stroke="#8B6F47" stroke-width="2.2" opacity="0.5"/>
-                    <ellipse cx="180" cy="334" rx="82" ry="28" fill="none" stroke="#8B6F47" stroke-width="1.8" opacity="0.4"/>
-                    <ellipse cx="180" cy="334" rx="56" ry="19" fill="none" stroke="#8B6F47" stroke-width="1.5" opacity="0.3"/>
-                    <ellipse cx="84" cy="312" rx="24" ry="11" fill="#7A5C38" opacity="0.85"/>
-                    <rect x="72" y="275" width="24" height="37" rx="5" fill="#8B6F47"/>
-                    <path d="M84 275 Q62 242 48 222" stroke="#4A5C3A" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-                    <path d="M84 275 Q94 240 92 218" stroke="#4A5C3A" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-                    <path d="M84 275 Q110 250 120 232" stroke="#4A5C3A" stroke-width="4" stroke-linecap="round" fill="none"/>
-                    <ellipse cx="276" cy="305" rx="22" ry="10" fill="#7A5C38" opacity="0.85"/>
-                    <rect x="265" y="270" width="22" height="35" rx="5" fill="#8B6F47"/>
-                    <path d="M276 270 Q258 240 248 222" stroke="#6B7F57" stroke-width="4" stroke-linecap="round" fill="none"/>
-                    <path d="M276 270 Q288 238 286 218" stroke="#6B7F57" stroke-width="4" stroke-linecap="round" fill="none"/>
-                    <ellipse cx="62" cy="368" rx="34" ry="15" fill="#B8967A" opacity="0.75"/>
-                    <rect x="30" y="336" width="64" height="32" rx="12" fill="#C4A882"/>
-                    <ellipse cx="62" cy="336" rx="32" ry="14" fill="#D4B896"/>
-                    <ellipse cx="180" cy="268" rx="34" ry="16" fill="#B8673A" opacity="0.85"/>
-                    <circle cx="310" cy="105" r="3.5" fill="#B8673A" opacity="0.5"/>
-                    <circle cx="48" cy="158" r="3" fill="#4A5C3A" opacity="0.45"/>
-                    <circle cx="328" cy="210" r="2.5" fill="#B8673A" opacity="0.4"/>
-                    <circle cx="36" cy="320" r="2.5" fill="#8B6F47" opacity="0.4"/>
-                    <line x1="180" y1="0" x2="180" y2="65" stroke="#D9C4A0" stroke-width="3.5"/>
-                    <path d="M132 65 Q180 88 228 65" stroke="#D9C4A0" stroke-width="2.5" fill="none"/>
-                    <path d="M120 82 Q180 108 240 82" stroke="#C4A882" stroke-width="2" fill="none"/>
-                    <path d="M115 98 Q180 126 245 98" stroke="#D9C4A0" stroke-width="1.8" fill="none"/>
-                    <line x1="132" y1="98" x2="126" y2="132" stroke="#C4A882" stroke-width="1.8"/>
-                    <line x1="148" y1="104" x2="144" y2="140" stroke="#C4A882" stroke-width="1.8"/>
-                    <line x1="164" y1="110" x2="161" y2="144" stroke="#C4A882" stroke-width="1.8"/>
-                    <line x1="180" y1="110" x2="180" y2="146" stroke="#C4A882" stroke-width="1.8"/>
-                    <line x1="196" y1="106" x2="196" y2="142" stroke="#C4A882" stroke-width="1.8"/>
-                    <line x1="212" y1="100" x2="214" y2="136" stroke="#C4A882" stroke-width="1.8"/>
-                    <line x1="228" y1="94" x2="232" y2="128" stroke="#C4A882" stroke-width="1.8"/>
-                </svg>
-                <div class="hero-badge">
-                    <div class="hero-badge-inner">
-                        <span class="big">🌿</span>
-                        <span class="small">Grand Baie<br/>Mauritius</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- MARQUEE -->
-    <div class="marquee-wrap">
-        <div class="marquee-track">
-            <span>Jute Rugs</span><span class="marquee-dot">✦</span>
-            <span>Seagrass Rugs</span><span class="marquee-dot">✦</span>
-            <span>Rattan Furniture</span><span class="marquee-dot">✦</span>
-            <span>Balinese Decor</span><span class="marquee-dot">✦</span>
-            <span>Jute Poufs</span><span class="marquee-dot">✦</span>
-            <span>Baskets & Cachepots</span><span class="marquee-dot">✦</span>
-            <span>Wooden Crates</span><span class="marquee-dot">✦</span>
-            <span>Wall Decor</span><span class="marquee-dot">✦</span>
-            <span>Bohemian Style</span><span class="marquee-dot">✦</span>
-            <span>Jute Rugs</span><span class="marquee-dot">✦</span>
-            <span>Seagrass Rugs</span><span class="marquee-dot">✦</span>
-            <span>Rattan Furniture</span><span class="marquee-dot">✦</span>
-            <span>Balinese Decor</span><span class="marquee-dot">✦</span>
-            <span>Jute Poufs</span><span class="marquee-dot">✦</span>
-            <span>Baskets & Cachepots</span><span class="marquee-dot">✦</span>
-            <span>Wooden Crates</span><span class="marquee-dot">✦</span>
-            <span>Wall Decor</span><span class="marquee-dot">✦</span>
-            <span>Bohemian Style</span><span class="marquee-dot">✦</span>
         </div>
     </div>
 
-    <!-- ABOUT -->
-    <section id="about">
-        <div class="about-img fade-up">
-            <div class="about-img-main">
-                <svg viewBox="0 0 300 360" width="80%" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="35" y="55" width="230" height="270" rx="5" fill="#EDE0CB"/>
-                    <rect x="45" y="155" width="210" height="7" fill="#C4A882"/>
-                    <rect x="45" y="240" width="210" height="7" fill="#C4A882"/>
-                    <ellipse cx="88" cy="149" rx="22" ry="24" fill="#B8673A" opacity="0.8"/>
-                    <ellipse cx="88" cy="126" rx="18" ry="9" fill="#D4845A" opacity="0.6"/>
-                    <path d="M86 126 Q74 100 64 84" stroke="#4A5C3A" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                    <path d="M86 126 Q96 98 102 82" stroke="#4A5C3A" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                    <rect x="135" y="122" width="38" height="34" rx="5" fill="#C4A882"/>
-                    <ellipse cx="154" cy="122" rx="19" ry="8" fill="#D4B896"/>
-                    <rect x="200" y="118" width="30" height="38" rx="15" fill="#8B6F47"/>
-                    <ellipse cx="215" cy="118" rx="15" ry="7" fill="#A08060"/>
-                    <rect x="55" y="68" width="55" height="85" rx="3" fill="#C4A060" opacity="0.75"/>
-                    <line x1="66" y1="84" x2="99" y2="84" stroke="#8B6F47" stroke-width="1.5" opacity="0.5"/>
-                    <line x1="64" y1="96" x2="101" y2="96" stroke="#8B6F47" stroke-width="1.5" opacity="0.45"/>
-                    <line x1="64" y1="108" x2="101" y2="108" stroke="#8B6F47" stroke-width="1.5" opacity="0.45"/>
-                    <line x1="64" y1="120" x2="101" y2="120" stroke="#8B6F47" stroke-width="1.5" opacity="0.4"/>
-                    <rect x="120" y="72" width="48" height="76" rx="3" fill="#D4845A" opacity="0.7"/>
-                    <rect x="180" y="78" width="78" height="64" rx="3" fill="#4A5C3A" opacity="0.65"/>
-                    <rect x="35" y="300" width="230" height="26" rx="3" fill="#C4A882" opacity="0.5"/>
-                    <rect x="125" y="240" width="50" height="84" rx="3" fill="#EDE0CB"/>
-                    <rect x="129" y="245" width="42" height="74" rx="2" fill="none" stroke="#C4A882" stroke-width="1.8"/>
-                    <circle cx="168" cy="285" r="3.5" fill="#8B6F47"/>
-                </svg>
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <div class="main-content">
+
+        <!-- DASHBOARD TAB -->
+        <div class="tab-pane-custom active" id="tab-dashboard">
+            <div class="row g-3 mb-4" id="dashboardStats">
+                <!-- Filled by JS -->
             </div>
-            <div class="about-img-accent">
-                <svg viewBox="0 0 160 130" width="80%" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <text x="80" y="52" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="42" fill="#FDFAF5" opacity="0.9" font-style="italic">Bali</text>
-                    <text x="80" y="84" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="18" fill="#FDFAF5" opacity="0.5" font-weight="300">meets Mauritius</text>
-                    <line x1="28" y1="96" x2="132" y2="96" stroke="#FDFAF5" stroke-width="1" opacity="0.25"/>
-                    <text x="80" y="116" text-anchor="middle" font-family="Jost, sans-serif" font-size="9" fill="#FDFAF5" opacity="0.4" letter-spacing="3" font-weight="500">CONCEPT STORE</text>
-                </svg>
-            </div>
-        </div>
-        <div class="about-text fade-up">
-            <div class="section-tag">Our Story</div>
-            <h2 class="section-title">Bringing <em>Bali</em> to Your Mauritian Home</h2>
-            <p>
-                At Cosy &amp; Comfy, we believe your home should be your happiest place. Born from a love of bohemian aesthetics and Balinese craftsmanship, we curate a unique collection of natural-fiber decor that brings warmth, texture, and soul to every corner.
-            </p>
-            <p>
-                Every rug is hand-woven with real natural jute and seagrass sourced from Bali. Every rattan piece is crafted by skilled artisans. Every basket, pouf, and cachepot is chosen because we'd proudly put it in our own homes.
-            </p>
-            <p>
-                Now located in Grand Baie, we're proud to serve all of Mauritius with competitive prices and exceptional personal service.
-            </p>
-            <div class="about-stats">
-                <div>
-                    <div class="stat-num">500+</div>
-                    <div class="stat-label">Products</div>
-                </div>
-                <div>
-                    <div class="stat-num">3+</div>
-                    <div class="stat-label">Years in Business</div>
-                </div>
-                <div>
-                    <div class="stat-num">🌿</div>
-                    <div class="stat-label">Natural Materials</div>
+            <div class="row g-3">
+                <div class="col-12">
+                    <div class="card border rounded-3 shadow-sm" style="background:var(--bg-card);">
+                        <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2" style="background:var(--card-header-bg);">
+                            <h5 class="mb-0 fw-semibold"><i class="bi bi-clock-history me-2"></i>Recent Bookings</h5>
+                        </div>
+                        <div class="card-body p-0 table-responsive">
+                            <table class="table table-custom mb-0" id="dashboardRecentTable">
+                                <thead><tr><th>Client</th><th>Studio</th><th>Check-in</th><th>Check-out</th><th>Status</th><th>Balance</th></tr></thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- PRODUCTS -->
-    <section id="products">
-        <div class="products-header">
-            <div class="section-tag">Our Collection</div>
-            <h2 class="section-title">Handpicked, <em>Handcrafted</em></h2>
-            <p style="font-size:0.9rem;color:rgba(62,42,24,0.55);max-width:540px;margin:0 auto;font-weight:400;line-height:1.8;">
-                Every piece is chosen with intention — natural, tactile, and beautiful. Designed to bring the boho spirit to life in your home.
-            </p>
-        </div>
-        <div class="products-grid">
-            <!-- FEATURED PRODUCT -->
-            <div class="product-card featured fade-up">
-                <div class="product-img">
-                    <div class="product-tag-badge">Best Seller</div>
-                    <svg class="illus" viewBox="0 0 500 370" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="500" height="370" fill="#EDE0CB"/>
-                        <circle cx="250" cy="205" r="150" fill="#C4A060" opacity="0.68"/>
-                        <circle cx="250" cy="205" r="124" fill="none" stroke="#8B6F47" stroke-width="3" opacity="0.55"/>
-                        <circle cx="250" cy="205" r="98" fill="none" stroke="#8B6F47" stroke-width="2.5" opacity="0.45"/>
-                        <circle cx="250" cy="205" r="72" fill="none" stroke="#8B6F47" stroke-width="2" opacity="0.38"/>
-                        <circle cx="250" cy="205" r="46" fill="none" stroke="#8B6F47" stroke-width="1.5" opacity="0.32"/>
-                        <circle cx="250" cy="205" r="22" fill="#B8967A" opacity="0.6"/>
-                        <line x1="250" y1="55" x2="250" y2="355" stroke="#8B6F47" stroke-width="1" opacity="0.18"/>
-                        <line x1="100" y1="205" x2="400" y2="205" stroke="#8B6F47" stroke-width="1" opacity="0.18"/>
-                        <line x1="144" y1="99" x2="356" y2="311" stroke="#8B6F47" stroke-width="1" opacity="0.16"/>
-                        <line x1="356" y1="99" x2="144" y2="311" stroke="#8B6F47" stroke-width="1" opacity="0.16"/>
-                        <rect x="18" y="18" width="130" height="38" rx="3" fill="#B8673A"/>
-                        <text x="83" y="43" text-anchor="middle" font-family="Jost,sans-serif" font-size="11" fill="white" letter-spacing="2.5" font-weight="600">ROUND RUG</text>
-                    </svg>
-                    <div class="product-img-overlay">
-                        <button class="product-quick-btn" onclick="openWhatsApp('Round Jute Rug')">Enquire Now</button>
-                    </div>
-                </div>
-                <div class="product-info">
-                    <div class="product-cat">Rugs & Flooring</div>
-                    <div class="product-name">Round Jute Rug — Natural Weave</div>
-                    <div class="product-desc">Hand-woven with 100% natural jute sourced from Bali. Perfect boho centrepiece for living rooms, bedrooms or terraces. Available in multiple sizes.</div>
-                    <div class="product-price">From Rs 250 <span>/ piece</span></div>
-                </div>
+        <!-- BOOKINGS TAB -->
+        <div class="tab-pane-custom" id="tab-bookings">
+            <div class="d-flex flex-wrap gap-2 mb-3 align-items-center">
+                <button class="btn btn-custom-primary" onclick="openBookingModal()"><i class="bi bi-plus-lg me-1"></i> Add Booking</button>
+                <button class="btn btn-outline-secondary btn-custom-sm" onclick="exportCSV()"><i class="bi bi-download me-1"></i> Export CSV</button>
+                <button class="btn btn-outline-secondary btn-custom-sm" onclick="document.getElementById('csvImportFile').click()"><i class="bi bi-upload me-1"></i> Import CSV</button>
+                <input type="file" id="csvImportFile" accept=".csv" style="display:none;" onchange="importCSV(event)">
+                <button class="btn btn-outline-info btn-custom-sm" onclick="printBookings()"><i class="bi bi-printer me-1"></i> Print</button>
+                <input type="text" class="form-control form-control-sm ms-auto" placeholder="Search bookings..." id="bookingSearch" style="max-width:220px;background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);" oninput="renderBookingsTable()">
+                <select class="form-select form-select-sm" id="filterStudio" style="max-width:130px;background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);" onchange="renderBookingsTable()">
+                    <option value="">All Studios</option>
+                    <option value="1">Studio 1</option><option value="2">Studio 2</option><option value="3">Studio 3</option>
+                    <option value="4">Studio 4</option><option value="5">Studio 5</option><option value="6">Studio 6</option>
+                    <option value="7">Studio 7</option><option value="8">Studio 8</option><option value="9">Studio 9</option>
+                </select>
+                <select class="form-select form-select-sm" id="filterStatus" style="max-width:140px;background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);" onchange="renderBookingsTable()">
+                    <option value="">All Statuses</option>
+                    <option value="Pending">Pending</option><option value="Confirmed">Confirmed</option>
+                    <option value="Checked-in">Checked-in</option><option value="Checked-out">Checked-out</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+                <input type="date" class="form-control form-control-sm" id="filterDate" style="max-width:160px;background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);" onchange="renderBookingsTable()" title="Filter by Check-in date">
             </div>
-
-            <!-- PRODUCT 2 -->
-            <div class="product-card fade-up">
-                <div class="product-img">
-                    <svg class="illus" viewBox="0 0 240 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="240" height="280" fill="#F7F0E3"/>
-                        <rect x="28" y="55" width="184" height="175" rx="5" fill="#A8956A" opacity="0.72"/>
-                        <line x1="28" y1="76" x2="212" y2="76" stroke="#7A6840" stroke-width="1.5" opacity="0.5"/>
-                        <line x1="28" y1="96" x2="212" y2="96" stroke="#7A6840" stroke-width="1.5" opacity="0.5"/>
-                        <line x1="28" y1="116" x2="212" y2="116" stroke="#7A6840" stroke-width="1.5" opacity="0.5"/>
-                        <line x1="28" y1="136" x2="212" y2="136" stroke="#7A6840" stroke-width="1.5" opacity="0.5"/>
-                        <line x1="28" y1="156" x2="212" y2="156" stroke="#7A6840" stroke-width="1.5" opacity="0.5"/>
-                        <line x1="28" y1="176" x2="212" y2="176" stroke="#7A6840" stroke-width="1.5" opacity="0.5"/>
-                        <line x1="28" y1="196" x2="212" y2="196" stroke="#7A6840" stroke-width="1.5" opacity="0.5"/>
-                        <line x1="28" y1="216" x2="212" y2="216" stroke="#7A6840" stroke-width="1.5" opacity="0.5"/>
-                        <line x1="60" y1="55" x2="60" y2="230" stroke="#7A6840" stroke-width="1" opacity="0.3"/>
-                        <line x1="92" y1="55" x2="92" y2="230" stroke="#7A6840" stroke-width="1" opacity="0.3"/>
-                        <line x1="124" y1="55" x2="124" y2="230" stroke="#7A6840" stroke-width="1" opacity="0.3"/>
-                        <line x1="156" y1="55" x2="156" y2="230" stroke="#7A6840" stroke-width="1" opacity="0.3"/>
-                        <line x1="188" y1="55" x2="188" y2="230" stroke="#7A6840" stroke-width="1" opacity="0.3"/>
-                        <rect x="28" y="55" width="184" height="175" rx="5" fill="none" stroke="#5A4A28" stroke-width="3.5"/>
-                    </svg>
-                    <div class="product-img-overlay">
-                        <button class="product-quick-btn" onclick="openWhatsApp('Seagrass Rug')">Enquire Now</button>
-                    </div>
-                </div>
-                <div class="product-info">
-                    <div class="product-cat">Rugs & Flooring</div>
-                    <div class="product-name">Seagrass Runner Rug</div>
-                    <div class="product-desc">Natural seagrass sourced from Bali. Durable, eco-friendly and beautifully textured for hallways or living areas.</div>
-                    <div class="product-price">From Rs 350 <span>/ piece</span></div>
-                </div>
-            </div>
-
-            <!-- PRODUCT 3 -->
-            <div class="product-card fade-up">
-                <div class="product-img">
-                    <svg class="illus" viewBox="0 0 240 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="240" height="280" fill="#EDE0CB"/>
-                        <path d="M58 225 Q58 130 120 130 Q182 130 182 225 Z" fill="#C4A882" stroke="#8B6F47" stroke-width="2.2"/>
-                        <path d="M68 208 Q68 146 120 146 Q172 146 172 208" fill="#B8967A"/>
-                        <line x1="72" y1="166" x2="168" y2="166" stroke="#8B6F47" stroke-width="1.5" opacity="0.55"/>
-                        <line x1="68" y1="180" x2="172" y2="180" stroke="#8B6F47" stroke-width="1.5" opacity="0.5"/>
-                        <line x1="68" y1="194" x2="172" y2="194" stroke="#8B6F47" stroke-width="1.5" opacity="0.5"/>
-                        <rect x="80" y="220" width="13" height="46" rx="5" fill="#7A5C38"/>
-                        <rect x="147" y="220" width="13" height="46" rx="5" fill="#7A5C38"/>
-                        <ellipse cx="120" cy="208" rx="40" ry="17" fill="#B8673A" opacity="0.82"/>
-                        <rect x="44" y="178" width="24" height="9" rx="5" fill="#8B6F47"/>
-                        <rect x="172" y="178" width="24" height="9" rx="5" fill="#8B6F47"/>
-                    </svg>
-                    <div class="product-img-overlay">
-                        <button class="product-quick-btn" onclick="openWhatsApp('Rattan Chair')">Enquire Now</button>
-                    </div>
-                </div>
-                <div class="product-info">
-                    <div class="product-cat">Furniture</div>
-                    <div class="product-name">Rattan Vintage One-Seater</div>
-                    <div class="product-desc">Classic boho-chic rattan armchair with terracotta cushion. Perfect for a bedroom corner or garden terrace.</div>
-                    <div class="product-price">Contact for price</div>
-                </div>
-            </div>
-
-            <!-- PRODUCT 4 -->
-            <div class="product-card fade-up">
-                <div class="product-img">
-                    <svg class="illus" viewBox="0 0 240 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="240" height="280" fill="#F7F0E3"/>
-                        <ellipse cx="120" cy="195" rx="84" ry="34" fill="#C4A882" opacity="0.78"/>
-                        <rect x="38" y="152" width="164" height="43" rx="14" fill="#D4B896"/>
-                        <ellipse cx="120" cy="152" rx="82" ry="32" fill="#E0C8A8"/>
-                        <ellipse cx="120" cy="152" rx="68" ry="26" fill="none" stroke="#8B6F47" stroke-width="2" opacity="0.5"/>
-                        <ellipse cx="120" cy="152" rx="52" ry="20" fill="none" stroke="#8B6F47" stroke-width="1.5" opacity="0.4"/>
-                        <ellipse cx="120" cy="152" rx="36" ry="14" fill="none" stroke="#8B6F47" stroke-width="1.5" opacity="0.32"/>
-                        <circle cx="120" cy="122" r="11" fill="#C4A882"/>
-                        <circle cx="120" cy="122" r="6" fill="#A88060"/>
-                    </svg>
-                    <div class="product-img-overlay">
-                        <button class="product-quick-btn" onclick="openWhatsApp('Jute Pouf')">Enquire Now</button>
-                    </div>
-                </div>
-                <div class="product-info">
-                    <div class="product-cat">Seating & Accents</div>
-                    <div class="product-name">Jute Pouf Ottoman</div>
-                    <div class="product-desc">Hand-crafted jute pouf, perfect as extra seating or a footrest. Adds natural texture to any boho interior.</div>
-                    <div class="product-price">From Rs 250 <span>/ piece</span></div>
-                </div>
-            </div>
-
-            <!-- PRODUCT 5 -->
-            <div class="product-card fade-up">
-                <div class="product-img">
-                    <svg class="illus" viewBox="0 0 240 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="240" height="280" fill="#EDE0CB"/>
-                        <path d="M76 245 Q55 180 68 148 Q88 126 120 126 Q152 126 162 148 Q175 180 164 245 Z" fill="#C4A882"/>
-                        <ellipse cx="120" cy="245" rx="44" ry="12" fill="#B8967A"/>
-                        <ellipse cx="120" cy="126" rx="32" ry="11" fill="#D4B896"/>
-                        <line x1="68" y1="168" x2="172" y2="168" stroke="#8B6F47" stroke-width="1.5" opacity="0.5"/>
-                        <line x1="63" y1="190" x2="177" y2="190" stroke="#8B6F47" stroke-width="1.5" opacity="0.5"/>
-                        <line x1="63" y1="212" x2="177" y2="212" stroke="#8B6F47" stroke-width="1.5" opacity="0.5"/>
-                        <line x1="66" y1="232" x2="174" y2="232" stroke="#8B6F47" stroke-width="1.5" opacity="0.45"/>
-                        <path d="M88 126 Q88 94 120 94 Q152 94 152 126" stroke="#8B6F47" stroke-width="5.5" fill="none" stroke-linecap="round"/>
-                        <path d="M170 245 Q158 212 164 196 Q174 184 188 184 Q202 184 207 196 Q214 212 204 245 Z" fill="#B8967A" opacity="0.88"/>
-                        <ellipse cx="188" cy="245" rx="16" ry="5.5" fill="#A08060"/>
-                        <path d="M38 235 Q28 208 34 194 Q42 182 54 182 Q66 182 70 194 Q76 208 70 235 Z" fill="#B8967A" opacity="0.88"/>
-                        <ellipse cx="54" cy="235" rx="16" ry="5.5" fill="#A08060"/>
-                    </svg>
-                    <div class="product-img-overlay">
-                        <button class="product-quick-btn" onclick="openWhatsApp('Baskets')">Enquire Now</button>
-                    </div>
-                </div>
-                <div class="product-info">
-                    <div class="product-cat">Storage & Decor</div>
-                    <div class="product-name">Wicker & Rattan Baskets</div>
-                    <div class="product-desc">Handwoven baskets in various sizes — ideal for storage, plants, or as statement decor pieces.</div>
-                    <div class="product-price">From Rs 250 <span>/ piece</span></div>
-                </div>
-            </div>
-
-            <!-- PRODUCT 6 -->
-            <div class="product-card fade-up">
-                <div class="product-img">
-                    <div class="product-tag-badge">New</div>
-                    <svg class="illus" viewBox="0 0 240 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="240" height="280" fill="#F7F0E3"/>
-                        <rect x="88" y="36" width="64" height="9" rx="4" fill="#8B6F47"/>
-                        <line x1="100" y1="45" x2="100" y2="70" stroke="#D4B896" stroke-width="3.5"/>
-                        <line x1="140" y1="45" x2="140" y2="70" stroke="#D4B896" stroke-width="3.5"/>
-                        <path d="M76 70 Q120 88 164 70" stroke="#D4B896" stroke-width="3.5" fill="none"/>
-                        <path d="M70 84 Q120 105 170 84" stroke="#C4A882" stroke-width="2.5" fill="none"/>
-                        <path d="M66 98 Q120 122 174 98" stroke="#D4B896" stroke-width="2" fill="none"/>
-                        <line x1="78" y1="98" x2="68" y2="155" stroke="#C4A882" stroke-width="2"/>
-                        <line x1="94" y1="106" x2="86" y2="168" stroke="#C4A882" stroke-width="2"/>
-                        <line x1="110" y1="112" x2="104" y2="176" stroke="#C4A882" stroke-width="2"/>
-                        <line x1="120" y1="114" x2="118" y2="180" stroke="#C4A882" stroke-width="2"/>
-                        <line x1="130" y1="112" x2="132" y2="176" stroke="#C4A882" stroke-width="2"/>
-                        <line x1="146" y1="106" x2="150" y2="168" stroke="#C4A882" stroke-width="2"/>
-                        <line x1="162" y1="98" x2="168" y2="155" stroke="#C4A882" stroke-width="2"/>
-                        <path d="M78 138 Q120 158 162 138" stroke="#B8967A" stroke-width="2.5" fill="none"/>
-                        <path d="M74 154 Q120 176 166 154" stroke="#C4A882" stroke-width="2" fill="none"/>
-                        <line x1="82" y1="166" x2="74" y2="235" stroke="#D4B896" stroke-width="1.5"/>
-                        <line x1="96" y1="174" x2="90" y2="242" stroke="#D4B896" stroke-width="1.5"/>
-                        <line x1="110" y1="178" x2="106" y2="246" stroke="#D4B896" stroke-width="1.5"/>
-                        <line x1="120" y1="180" x2="120" y2="250" stroke="#D4B896" stroke-width="1.5"/>
-                        <line x1="130" y1="178" x2="134" y2="246" stroke="#D4B896" stroke-width="1.5"/>
-                        <line x1="144" y1="174" x2="150" y2="242" stroke="#D4B896" stroke-width="1.5"/>
-                        <line x1="158" y1="166" x2="166" y2="235" stroke="#D4B896" stroke-width="1.5"/>
-                    </svg>
-                    <div class="product-img-overlay">
-                        <button class="product-quick-btn" onclick="openWhatsApp('Wall Decor Macrame')">Enquire Now</button>
-                    </div>
-                </div>
-                <div class="product-info">
-                    <div class="product-cat">Wall Decor</div>
-                    <div class="product-name">Macramé Wall Hangings</div>
-                    <div class="product-desc">Hand-knotted macramé pieces that bring texture and bohemian soul to any wall. Also available: vintage clocks and woven panels.</div>
-                    <div class="product-price">From Rs 250 <span>/ piece</span></div>
-                </div>
-            </div>
-
-            <!-- PRODUCT 7 -->
-            <div class="product-card fade-up">
-                <div class="product-img">
-                    <svg class="illus" viewBox="0 0 240 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="240" height="280" fill="#EDE0CB"/>
-                        <path d="M72 248 Q64 188 76 166 Q94 146 120 146 Q146 146 164 166 Q176 188 168 248 Z" fill="#B8673A" opacity="0.84"/>
-                        <ellipse cx="120" cy="248" rx="48" ry="14" fill="#A05630"/>
-                        <ellipse cx="120" cy="146" rx="44" ry="14" fill="#D4845A"/>
-                        <path d="M76 196 L92 180 L108 196 L92 212 Z" fill="none" stroke="#FDFAF5" stroke-width="1.5" opacity="0.58"/>
-                        <path d="M118 182 L134 166 L150 182 L134 198 Z" fill="none" stroke="#FDFAF5" stroke-width="1.5" opacity="0.58"/>
-                        <path d="M92 222 L108 206 L124 222 L108 238 Z" fill="none" stroke="#FDFAF5" stroke-width="1.5" opacity="0.52"/>
-                        <path d="M120 146 Q94 112 80 90" stroke="#4A5C3A" stroke-width="5.5" stroke-linecap="round" fill="none"/>
-                        <path d="M120 146 Q130 108 135 86" stroke="#4A5C3A" stroke-width="5.5" stroke-linecap="round" fill="none"/>
-                        <path d="M120 146 Q150 118 162 102" stroke="#4A5C3A" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-                        <path d="M120 146 Q98 126 84 112" stroke="#6B7F57" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                    </svg>
-                    <div class="product-img-overlay">
-                        <button class="product-quick-btn" onclick="openWhatsApp('Cachepot Planter')">Enquire Now</button>
-                    </div>
-                </div>
-                <div class="product-info">
-                    <div class="product-cat">Planters & Pots</div>
-                    <div class="product-name">Terracotta Cachepots</div>
-                    <div class="product-desc">Geometric-patterned cachepots in terracotta and earthy tones. Perfect for indoor plants and creating a boho jungle corner.</div>
-                    <div class="product-price">From Rs 250 <span>/ piece</span></div>
-                </div>
-            </div>
-
-            <!-- PRODUCT 8 -->
-            <div class="product-card fade-up">
-                <div class="product-img">
-                    <svg class="illus" viewBox="0 0 240 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="240" height="280" fill="#F7F0E3"/>
-                        <rect x="26" y="198" width="188" height="68" rx="3" fill="#C4A882"/>
-                        <rect x="26" y="198" width="188" height="68" rx="3" fill="none" stroke="#8B6F47" stroke-width="2"/>
-                        <line x1="120" y1="198" x2="120" y2="266" stroke="#8B6F47" stroke-width="1.5" opacity="0.55"/>
-                        <line x1="26" y1="232" x2="214" y2="232" stroke="#8B6F47" stroke-width="1.5" opacity="0.45"/>
-                        <rect x="42" y="140" width="156" height="60" rx="3" fill="#D4B896"/>
-                        <rect x="42" y="140" width="156" height="60" rx="3" fill="none" stroke="#8B6F47" stroke-width="2"/>
-                        <line x1="120" y1="140" x2="120" y2="200" stroke="#8B6F47" stroke-width="1.5" opacity="0.5"/>
-                        <line x1="42" y1="170" x2="198" y2="170" stroke="#8B6F47" stroke-width="1.5" opacity="0.4"/>
-                        <rect x="66" y="98" width="108" height="46" rx="3" fill="#E0C8A8"/>
-                        <rect x="66" y="98" width="108" height="46" rx="3" fill="none" stroke="#8B6F47" stroke-width="2"/>
-                        <ellipse cx="130" cy="96" rx="17" ry="7" fill="#7A5C38" opacity="0.85"/>
-                        <rect x="120" y="76" width="20" height="20" rx="5" fill="#8B6F47"/>
-                        <path d="M130 76 Q118 58 108 44" stroke="#4A5C3A" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                        <path d="M130 76 Q140 56 144 42" stroke="#4A5C3A" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                        <rect x="78" y="86" width="20" height="38" rx="7" fill="#B8673A" opacity="0.7"/>
-                    </svg>
-                    <div class="product-img-overlay">
-                        <button class="product-quick-btn" onclick="openWhatsApp('Wooden Crates')">Enquire Now</button>
-                    </div>
-                </div>
-                <div class="product-info">
-                    <div class="product-cat">Storage & Display</div>
-                    <div class="product-name">Pallet Wood Crates</div>
-                    <div class="product-desc">Rustic pallet wood crates — ideal as shelves, side tables, or display risers. Handmade with character and charm.</div>
-                    <div class="product-price">From Rs 250 <span>/ piece</span></div>
-                </div>
+            <div class="table-responsive">
+                <table class="table table-custom" id="bookingsTable">
+                    <thead><tr>
+                        <th>Client</th><th>Studio</th><th>Check-in</th><th>Check-out</th><th>Nights</th><th>Total</th><th>Deposit</th><th>Balance</th><th>Status</th><th>Source</th><th>Actions</th>
+                    </tr></thead>
+                    <tbody></tbody>
+                </table>
+                <p class="text-muted text-center py-3" id="noBookingsMsg" style="display:none;">No bookings found.</p>
             </div>
         </div>
-    </section>
 
-    <!-- FEATURES -->
-    <div id="features">
-        <div class="feature-item fade-up">
-            <svg class="feature-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="24" cy="24" r="20"/><path d="M24 14 Q18 20 24 26 Q30 20 24 14"/><path d="M14 24 Q20 18 26 24 Q20 30 14 24"/><path d="M34 24 Q28 18 22 24 Q28 30 34 24"/>
-            </svg>
-            <div class="feature-title">100% Natural Materials</div>
-            <div class="feature-desc">Real jute, seagrass, rattan and reclaimed wood — no synthetics, no shortcuts.</div>
+        <!-- STUDIOS TAB -->
+        <div class="tab-pane-custom" id="tab-studios">
+            <h5 class="fw-semibold mb-3"><i class="bi bi-grid-3x3-gap me-2"></i>Studio Overview</h5>
+            <div class="row g-3" id="studioCardsContainer">
+                <!-- Filled by JS -->
+            </div>
         </div>
-        <div class="feature-item fade-up">
-            <svg class="feature-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M24 8 L28 18 L40 18 L30 26 L34 38 L24 30 L14 38 L18 26 L8 18 L20 18 Z"/>
-            </svg>
-            <div class="feature-title">Handcrafted in Bali</div>
-            <div class="feature-desc">Every piece is crafted by skilled Balinese artisans using centuries-old weaving traditions.</div>
+
+        <!-- CALENDAR TAB -->
+        <div class="tab-pane-custom" id="tab-calendar">
+            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                <h5 class="fw-semibold mb-0"><i class="bi bi-calendar-month me-2"></i>Booking Calendar</h5>
+                <div class="d-flex align-items-center gap-2">
+                    <button class="btn btn-sm btn-outline-secondary" onclick="navigateCalendar(-1)"><i class="bi bi-chevron-left"></i></button>
+                    <span class="fw-semibold" id="calendarMonthLabel"></span>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="navigateCalendar(1)"><i class="bi bi-chevron-right"></i></button>
+                    <button class="btn btn-sm btn-outline-info" onclick="navigateCalendar(0)">Today</button>
+                </div>
+            </div>
+            <div class="card border rounded-3 shadow-sm p-3" style="background:var(--bg-card);">
+                <div class="calendar-grid" id="calendarGrid">
+                    <!-- Filled by JS -->
+                </div>
+                <div class="d-flex flex-wrap gap-3 mt-3 small">
+                    <span><span class="booking-dot d-inline-block me-1 dot-pending" style="width:8px;height:8px;"></span> Pending</span>
+                    <span><span class="booking-dot d-inline-block me-1 dot-confirmed" style="width:8px;height:8px;"></span> Confirmed</span>
+                    <span><span class="booking-dot d-inline-block me-1 dot-checked-in" style="width:8px;height:8px;"></span> Checked-in</span>
+                    <span><span class="booking-dot d-inline-block me-1 dot-checked-out" style="width:8px;height:8px;"></span> Checked-out</span>
+                    <span><span class="booking-dot d-inline-block me-1 dot-cancelled" style="width:8px;height:8px;"></span> Cancelled</span>
+                </div>
+            </div>
+            <div class="mt-3 card border rounded-3 shadow-sm p-3" style="background:var(--bg-card);" id="calendarDayDetails">
+                <p class="text-muted mb-0 text-center">Click a day to see booking details</p>
+            </div>
         </div>
-        <div class="feature-item fade-up">
-            <svg class="feature-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 40 L12 20 Q12 10 24 10 Q36 10 36 20 L36 40"/><line x1="8" y1="40" x2="40" y2="40"/><line x1="24" y1="10" x2="24" y2="40"/>
-            </svg>
-            <div class="feature-title">Affordable Prices</div>
-            <div class="feature-desc">Luxury boho decor shouldn't break the bank. Our prices start from just Rs 250.</div>
+
+        <!-- REPORTS TAB -->
+        <div class="tab-pane-custom" id="tab-reports">
+            <h5 class="fw-semibold mb-3"><i class="bi bi-graph-up me-2"></i>Reports</h5>
+            <div class="row g-3 mb-3">
+                <div class="col-md-4"><button class="btn btn-outline-primary w-100" onclick="generateReport('daily')"><i class="bi bi-calendar-day me-1"></i> Daily Report</button></div>
+                <div class="col-md-4"><button class="btn btn-outline-primary w-100" onclick="generateReport('weekly')"><i class="bi bi-calendar-week me-1"></i> Weekly Report</button></div>
+                <div class="col-md-4"><button class="btn btn-outline-primary w-100" onclick="generateReport('monthly')"><i class="bi bi-calendar-month me-1"></i> Monthly Report</button></div>
+                <div class="col-md-6"><button class="btn btn-outline-success w-100" onclick="generateReport('revenue')"><i class="bi bi-cash-stack me-1"></i> Revenue Report</button></div>
+                <div class="col-md-6"><button class="btn btn-outline-info w-100" onclick="generateReport('occupancy')"><i class="bi bi-pie-chart me-1"></i> Occupancy Report</button></div>
+            </div>
+            <div class="card border rounded-3 shadow-sm p-3" style="background:var(--bg-card);" id="reportOutput">
+                <p class="text-muted text-center mb-0">Select a report type to generate</p>
+            </div>
         </div>
-        <div class="feature-item fade-up">
-            <svg class="feature-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="24" cy="20" r="8"/><path d="M8 40 Q8 28 24 28 Q40 28 40 40"/>
-            </svg>
-            <div class="feature-title">Personal Service</div>
-            <div class="feature-desc">We're a small local team who genuinely loves what we do. Come in for a chat or WhatsApp us anytime.</div>
+
+    </div>
+
+    <!-- ==================== BOOKING MODAL ==================== -->
+    <div class="modal fade" id="bookingModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content modal-content-custom">
+                <div class="modal-header modal-header-custom">
+                    <h5 class="modal-title fw-semibold" id="bookingModalTitle"><i class="bi bi-pencil-square me-2"></i>Add Booking</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter:var(--text-primary);"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="bookingForm" novalidate>
+                        <input type="hidden" id="bookingId">
+                        <div class="row g-3">
+                            <!-- Client Info -->
+                            <div class="col-md-6"><label class="form-label fw-semibold small">Full Name <span class="text-danger">*</span></label><input type="text" class="form-control" id="clientName" required placeholder="e.g. Jean Dupont" style="background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);"></div>
+                            <div class="col-md-6"><label class="form-label fw-semibold small">Phone Number <span class="text-danger">*</span></label><input type="tel" class="form-control" id="phone" required placeholder="+230 5XXX XXXX" style="background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);"></div>
+                            <div class="col-md-4"><label class="form-label fw-semibold small">WhatsApp Number</label><input type="tel" class="form-control" id="whatsapp" placeholder="+230 5XXX XXXX" style="background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);"></div>
+                            <div class="col-md-4"><label class="form-label fw-semibold small">Email</label><input type="email" class="form-control" id="email" placeholder="client@email.com" style="background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);"></div>
+                            <div class="col-md-4"><label class="form-label fw-semibold small">Nationality</label><input type="text" class="form-control" id="nationality" placeholder="e.g. French" style="background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);"></div>
+                            <div class="col-md-6"><label class="form-label fw-semibold small">ID / Passport Number</label><input type="text" class="form-control" id="idPassport" placeholder="Passport or ID number" style="background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);"></div>
+                            <!-- Booking Details -->
+                            <div class="col-md-3"><label class="form-label fw-semibold small">Studio Number <span class="text-danger">*</span></label><select class="form-select" id="studioNumber" required style="background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);"><option value="">Select</option><option value="1">Studio 1</option><option value="2">Studio 2</option><option value="3">Studio 3</option><option value="4">Studio 4</option><option value="5">Studio 5</option><option value="6">Studio 6</option><option value="7">Studio 7</option><option value="8">Studio 8</option><option value="9">Studio 9</option></select></div>
+                            <div class="col-md-3"><label class="form-label fw-semibold small">Check-in Date <span class="text-danger">*</span></label><input type="date" class="form-control" id="checkIn" required onchange="autoCalculate()" style="background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);"></div>
+                            <div class="col-md-3"><label class="form-label fw-semibold small">Check-out Date <span class="text-danger">*</span></label><input type="date" class="form-control" id="checkOut" required onchange="autoCalculate()" style="background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);"></div>
+                            <div class="col-md-3"><label class="form-label fw-semibold small">Nights</label><input type="number" class="form-control" id="nights" readonly style="background:var(--card-header-bg);color:var(--text-primary);border-color:var(--input-border);"></div>
+                            <div class="col-md-3"><label class="form-label fw-semibold small">Adults</label><input type="number" class="form-control" id="adults" value="1" min="1" style="background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);"></div>
+                            <div class="col-md-3"><label class="form-label fw-semibold small">Children</label><input type="number" class="form-control" id="children" value="0" min="0" style="background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);"></div>
+                            <div class="col-md-3"><label class="form-label fw-semibold small">Price/Night (MUR)</label><input type="number" class="form-control" id="pricePerNight" value="0" min="0" step="0.01" oninput="autoCalculate()" style="background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);"></div>
+                            <div class="col-md-3"><label class="form-label fw-semibold small">Total Price (MUR)</label><input type="number" class="form-control" id="totalPrice" readonly style="background:var(--card-header-bg);color:var(--text-primary);border-color:var(--input-border);"></div>
+                            <div class="col-md-4"><label class="form-label fw-semibold small">Deposit Paid (MUR)</label><input type="number" class="form-control" id="deposit" value="0" min="0" step="0.01" oninput="autoCalculate()" style="background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);"></div>
+                            <div class="col-md-4"><label class="form-label fw-semibold small">Remaining Balance (MUR)</label><input type="number" class="form-control" id="balance" readonly style="background:var(--card-header-bg);color:var(--text-primary);border-color:var(--input-border);"></div>
+                            <div class="col-md-4"><label class="form-label fw-semibold small">Booking Source</label><select class="form-select" id="bookingSource" style="background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);"><option value="Direct">Direct</option><option value="Facebook">Facebook</option><option value="TikTok">TikTok</option><option value="WhatsApp">WhatsApp</option><option value="Airbnb">Airbnb</option><option value="Booking.com">Booking.com</option><option value="Agoda">Agoda</option><option value="Expedia">Expedia</option><option value="Other">Other</option></select></div>
+                            <div class="col-md-4"><label class="form-label fw-semibold small">Arrival Time</label><input type="time" class="form-control" id="arrivalTime" style="background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);"></div>
+                            <div class="col-md-4"><label class="form-label fw-semibold small">Departure Time</label><input type="time" class="form-control" id="departureTime" style="background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);"></div>
+                            <div class="col-md-4"><label class="form-label fw-semibold small">Vehicle Registration</label><input type="text" class="form-control" id="vehicleReg" placeholder="Optional" style="background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);"></div>
+                            <div class="col-md-6"><label class="form-label fw-semibold small">Special Requests</label><textarea class="form-control" id="specialRequests" rows="2" placeholder="Any special requests..." style="background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);"></textarea></div>
+                            <div class="col-md-6"><label class="form-label fw-semibold small">Internal Notes</label><textarea class="form-control" id="internalNotes" rows="2" placeholder="Private notes..." style="background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);"></textarea></div>
+                            <div class="col-md-6"><label class="form-label fw-semibold small">Booking Status</label><select class="form-select" id="bookingStatus" style="background:var(--input-bg);color:var(--text-primary);border-color:var(--input-border);"><option value="Pending">Pending</option><option value="Confirmed">Confirmed</option><option value="Checked-in">Checked-in</option><option value="Checked-out">Checked-out</option><option value="Cancelled">Cancelled</option></select></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer border-top" style="border-color:var(--border-color)!important;">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-custom-primary" onclick="saveBooking()"><i class="bi bi-check-lg me-1"></i> Save Booking</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- GALLERY -->
-    <section id="gallery">
-        <div class="gallery-header">
-            <div class="section-tag">Inspiration</div>
-            <h2 class="section-title">Style Your <em>Space</em></h2>
-        </div>
-        <div class="gallery-grid">
-            <div class="gal-item fade-up" style="background:#C4A882;">
-                <svg viewBox="0 0 320 540" width="82%" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="18" y="360" width="284" height="124" rx="5" fill="#B8967A" opacity="0.5"/>
-                    <ellipse cx="160" cy="405" rx="135" ry="52" fill="#D4A060" opacity="0.65"/>
-                    <ellipse cx="160" cy="405" rx="114" ry="44" fill="none" stroke="#8B6F47" stroke-width="2" opacity="0.5"/>
-                    <rect x="36" y="308" width="248" height="94" rx="12" fill="#E0C8A8"/>
-                    <rect x="36" y="308" width="248" height="32" rx="8" fill="#EDE0CB"/>
-                    <rect x="60" y="294" width="64" height="44" rx="7" fill="#B8673A" opacity="0.82"/>
-                    <rect x="140" y="298" width="52" height="40" rx="7" fill="#4A5C3A" opacity="0.72"/>
-                    <rect x="208" y="294" width="64" height="44" rx="7" fill="#C4A060" opacity="0.82"/>
-                    <rect x="14" y="258" width="30" height="64" rx="7" fill="#B8673A" opacity="0.68"/>
-                    <path d="M29 258 Q10 220 2 194" stroke="#4A5C3A" stroke-width="5.5" stroke-linecap="round" fill="none"/>
-                    <path d="M29 258 Q38 218 42 192" stroke="#4A5C3A" stroke-width="5.5" stroke-linecap="round" fill="none"/>
-                    <path d="M29 258 Q52 234 60 214" stroke="#6B7F57" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-                    <rect x="108" y="56" width="104" height="9" rx="4" fill="#8B6F47"/>
-                    <path d="M118 65 Q160 85 202 65" stroke="#D4B896" stroke-width="3.5" fill="none"/>
-                    <path d="M112 78 Q160 102 208 78" stroke="#C4A882" stroke-width="2.5" fill="none"/>
-                    <path d="M108 92 Q160 118 212 92" stroke="#D4B896" stroke-width="2" fill="none"/>
-                    <line x1="118" y1="92" x2="108" y2="148" stroke="#C4A882" stroke-width="1.5"/>
-                    <line x1="132" y1="100" x2="124" y2="158" stroke="#C4A882" stroke-width="1.5"/>
-                    <line x1="146" y1="106" x2="140" y2="166" stroke="#C4A882" stroke-width="1.5"/>
-                    <line x1="160" y1="108" x2="158" y2="170" stroke="#C4A882" stroke-width="1.5"/>
-                    <line x1="174" y1="106" x2="174" y2="166" stroke="#C4A882" stroke-width="1.5"/>
-                    <line x1="188" y1="102" x2="190" y2="160" stroke="#C4A882" stroke-width="1.5"/>
-                    <line x1="202" y1="94" x2="208" y2="150" stroke="#C4A882" stroke-width="1.5"/>
-                    <line x1="284" y1="176" x2="284" y2="388" stroke="#8B6F47" stroke-width="4.5" stroke-linecap="round"/>
-                    <ellipse cx="284" cy="176" rx="32" ry="13" fill="#D4B896" opacity="0.78"/>
-                    <circle cx="284" cy="384" r="13" fill="#7A5C38"/>
-                </svg>
-                <div class="gal-label">Living Room Inspo</div>
-            </div>
-            <div class="gal-item fade-up" style="background:#D9C4A0;">
-                <svg viewBox="0 0 240 260" width="70%" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="120" cy="140" r="98" fill="#C4A060" opacity="0.65"/>
-                    <circle cx="120" cy="140" r="80" fill="none" stroke="#8B6F47" stroke-width="2.2" opacity="0.5"/>
-                    <circle cx="120" cy="140" r="62" fill="none" stroke="#8B6F47" stroke-width="1.5" opacity="0.4"/>
-                    <circle cx="120" cy="140" r="44" fill="none" stroke="#8B6F47" stroke-width="1.5" opacity="0.32"/>
-                    <line x1="120" y1="42" x2="120" y2="238" stroke="#8B6F47" stroke-width="1" opacity="0.18"/>
-                    <line x1="22" y1="140" x2="218" y2="140" stroke="#8B6F47" stroke-width="1" opacity="0.18"/>
-                </svg>
-                <div class="gal-label">Round Jute Rug</div>
-            </div>
-            <div class="gal-item fade-up" style="background:#4A5C3A;">
-                <svg viewBox="0 0 240 260" width="58%" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <line x1="78" y1="0" x2="78" y2="55" stroke="#D4B896" stroke-width="2.5"/>
-                    <line x1="162" y1="0" x2="162" y2="70" stroke="#D4B896" stroke-width="2.5"/>
-                    <path d="M56 88 Q56 50 78 50 Q100 50 100 88 Z" fill="#B8673A" opacity="0.88"/>
-                    <ellipse cx="78" cy="88" rx="22" ry="9" fill="#A05630"/>
-                    <path d="M140 108 Q140 66 162 66 Q184 66 184 108 Z" fill="#B8673A" opacity="0.88"/>
-                    <ellipse cx="162" cy="108" rx="22" ry="9" fill="#A05630"/>
-                    <path d="M78 50 Q56 88 38 115" stroke="#6B7F57" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-                    <path d="M78 50 Q94 84 100 114" stroke="#4A5C3A" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-                    <path d="M78 50 Q64 96 54 138" stroke="#6B7F57" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                    <path d="M162 66 Q142 104 128 134" stroke="#6B7F57" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-                    <path d="M162 66 Q176 100 180 132" stroke="#4A5C3A" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-                    <path d="M162 66 Q150 110 144 150" stroke="#6B7F57" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                    <path d="M38 115 Q22 158 20 192" stroke="#6B7F57" stroke-width="3" stroke-linecap="round" fill="none"/>
-                    <path d="M100 114 Q110 154 108 190" stroke="#4A5C3A" stroke-width="3" stroke-linecap="round" fill="none"/>
-                    <path d="M128 134 Q114 172 116 210" stroke="#6B7F57" stroke-width="3" stroke-linecap="round" fill="none"/>
-                    <path d="M180 132 Q192 172 188 210" stroke="#4A5C3A" stroke-width="3" stroke-linecap="round" fill="none"/>
-                </svg>
-                <div class="gal-label" style="color:#FDFAF5;background:rgba(62,42,24,0.5);">Jungle Corner</div>
-            </div>
-            <div class="gal-item fade-up" style="background:#F7F0E3;">
-                <svg viewBox="0 0 240 260" width="72%" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M36 252 Q14 178 26 146 Q50 120 90 120 Q130 120 144 146 Q158 178 140 252 Z" fill="#C4A882"/>
-                    <ellipse cx="90" cy="252" rx="52" ry="15" fill="#A88060"/>
-                    <ellipse cx="90" cy="120" rx="52" ry="15" fill="#D4B896"/>
-                    <line x1="24" y1="172" x2="156" y2="172" stroke="#8B6F47" stroke-width="1.5" opacity="0.5"/>
-                    <line x1="20" y1="196" x2="160" y2="196" stroke="#8B6F47" stroke-width="1.5" opacity="0.5"/>
-                    <line x1="20" y1="220" x2="160" y2="220" stroke="#8B6F47" stroke-width="1.5" opacity="0.5"/>
-                    <line x1="24" y1="240" x2="156" y2="240" stroke="#8B6F47" stroke-width="1.5" opacity="0.45"/>
-                    <path d="M54 120 Q54 86 90 86 Q126 86 126 120" stroke="#8B6F47" stroke-width="6" fill="none" stroke-linecap="round"/>
-                    <path d="M164 248 Q150 216 158 198 Q170 184 188 184 Q206 184 212 198 Q220 216 210 248 Z" fill="#B8967A" opacity="0.86"/>
-                    <ellipse cx="188" cy="248" rx="24" ry="7" fill="#A08060"/>
-                </svg>
-                <div class="gal-label">Basket Collection</div>
+    <!-- ==================== WHATSAPP MODAL ==================== -->
+    <div class="modal fade" id="whatsappModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-content-custom">
+                <div class="modal-header modal-header-custom">
+                    <h5 class="modal-title fw-semibold"><i class="bi bi-whatsapp me-2 text-success"></i>WhatsApp Message</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control mb-3" id="whatsappMessage" rows="12" readonly style="background:var(--card-header-bg);color:var(--text-primary);font-family:monospace;font-size:0.85rem;"></textarea>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <button class="btn btn-success btn-sm" onclick="openWhatsApp()"><i class="bi bi-whatsapp me-1"></i> Open WhatsApp</button>
+                        <button class="btn btn-outline-secondary btn-sm" onclick="copyWhatsAppMessage()"><i class="bi bi-clipboard me-1"></i> Copy Message</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- TESTIMONIAL -->
-    <section id="testimonials">
-        <div class="testimonials-inner fade-up">
-            <span class="quote-mark">"</span>
-            <div class="stars">★★★★★</div>
-            <p class="quote-text">
-                I discovered Cosy &amp; Comfy and completely transformed my living room. The jute rugs are absolutely beautiful — the quality is incredible for the price, and the owner was so helpful in choosing the right pieces.
-            </p>
-            <div class="quote-author">— Happy Customer, Grand Baie</div>
-        </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact">
-        <div>
-            <div class="section-tag">Get In Touch</div>
-            <h2 class="section-title">Visit Our<br/><em>Store</em></h2>
-            <div class="contact-info">
-                <div class="contact-row">
-                    <div class="contact-icon">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    </div>
-                    <div>
-                        <div class="contact-detail-label">Address</div>
-                        <div class="contact-detail-value">Sottise Road, Grand Baie, Mauritius</div>
-                    </div>
-                </div>
-                <div class="contact-row">
-                    <div class="contact-icon">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.44 2 2 0 0 1 3.6 2.24h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91A16 16 0 0 0 14 16.09l.86-.86a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                    </div>
-                    <div>
-                        <div class="contact-detail-label">Phone & WhatsApp</div>
-                        <div class="contact-detail-value"><a href="tel:+23057800485">+230 5780 0485</a></div>
-                    </div>
-                </div>
-                <div class="contact-row">
-                    <div class="contact-icon">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    </div>
-                    <div>
-                        <div class="contact-detail-label">Email</div>
-                        <div class="contact-detail-value"><a href="mailto:cosycomfy20@gmail.com">cosycomfy20@gmail.com</a></div>
-                    </div>
-                </div>
-                <div class="contact-row">
-                    <div class="contact-icon">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    </div>
-                    <div>
-                        <div class="contact-detail-label">Opening Hours</div>
-                        <div class="contact-detail-value">Mon–Fri: 10:30 AM – 4:30 PM<br/>Saturday: 10:30 AM – 3:30 PM<br/>Sunday: Closed</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div class="section-tag" style="color:var(--sand);">Send a Message</div>
-            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--cream);margin-bottom:24px;margin-top:6px;letter-spacing:-0.01em;">
-                We'd love to<br/><em style="color:var(--sand);">hear from you</em>
-            </h3>
-            <form class="contact-form" onsubmit="submitForm(event)">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label class="form-label">First Name</label>
-                        <input type="text" class="form-input" placeholder="Your name" id="fname" required/>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Last Name</label>
-                        <input type="text" class="form-input" placeholder="Your surname" id="lname" required/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Email or Phone</label>
-                    <input type="text" class="form-input" placeholder="your@email.com or +230 ..." id="contact-in" required/>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">What are you looking for?</label>
-                    <textarea class="form-input form-textarea" placeholder="Tell us about the products you're interested in..." id="msg" required></textarea>
-                </div>
-                <button type="submit" class="btn-submit">Send Message →</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-top">
-            <div>
-                <div class="footer-logo">Cosy<span>&</span>Comfy</div>
-                <div class="footer-tagline">Bohemian & Balinese Home Decor · Grand Baie, Mauritius</div>
-            </div>
-            <div class="footer-links">
-                <div class="footer-col">
-                    <h4>Products</h4>
-                    <ul>
-                        <li><a href="#products">Jute Rugs</a></li>
-                        <li><a href="#products">Seagrass Rugs</a></li>
-                        <li><a href="#products">Rattan Furniture</a></li>
-                        <li><a href="#products">Jute Poufs</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>More</h4>
-                    <ul>
-                        <li><a href="#products">Baskets</a></li>
-                        <li><a href="#products">Cachepots</a></li>
-                        <li><a href="#products">Wooden Crates</a></li>
-                        <li><a href="#products">Wall Decor</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Visit Us</h4>
-                    <ul>
-                        <li><a href="#contact">Sottise Rd, Grand Baie</a></li>
-                        <li><a href="tel:+23057800485">+230 5780 0485</a></li>
-                        <li><a href="mailto:cosycomfy20@gmail.com">cosycomfy20@gmail.com</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="footer-copy">&copy; 2025 Cosy &amp; Comfy Concept Store. All rights reserved.</div>
-            <div class="social-links">
-                <a href="https://www.facebook.com/p/Cosy-Comfy-Concept-Store-100092045047940/" target="_blank" rel="noopener" class="social-link" title="Facebook">f</a>
-                <a href="https://wa.me/23057800485" target="_blank" rel="noopener" class="social-link" title="WhatsApp">w</a>
-                <a href="mailto:cosycomfy20@gmail.com" class="social-link" title="Email">@</a>
-            </div>
-        </div>
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="text-center py-3 mt-4 border-top" style="border-color:var(--border-color)!important;">
+        <small class="text-muted">Developed for Studio Booking Manager - Trou aux Biches, Mauritius</small>
     </footer>
 
-    <!-- WHATSAPP FLOAT BUTTON -->
-    <a href="https://wa.me/23057800485?text=Hello%20Cosy%20%26%20Comfy!%20I%27d%20like%20to%20know%20more%20about%20your%20products." target="_blank" rel="noopener" class="whatsapp-float" title="Chat on WhatsApp">
-        <span class="whatsapp-tooltip">Chat with us!</span>
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-        </svg>
-    </a>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    </script>
 
     <script>
-        // Scroll animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) e.target.classList.add('visible');
+        (function() {
+            // ==================== CONSTANTS ====================
+            const TOTAL_STUDIOS = 9;
+            const STORAGE_KEY = 'studioBookingManager_data';
+            const THEME_KEY = 'studioBookingManager_theme';
+            const STATUSES = ['Pending', 'Confirmed', 'Checked-in', 'Checked-out', 'Cancelled'];
+            const SOURCES = ['Direct', 'Facebook', 'TikTok', 'WhatsApp', 'Airbnb', 'Booking.com', 'Agoda',
+            'Expedia', 'Other'];
+            const DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+                'October', 'November', 'December'
+            ];
+
+            // ==================== STATE ====================
+            let bookings = [];
+            let calendarYear, calendarMonth;
+            let currentWhatsAppBookingId = null;
+
+            // ==================== DOM REFS ====================
+            const $spinner = document.getElementById('spinnerOverlay');
+            const $toastContainer = document.getElementById('toastContainer');
+            const $notifBadge = document.getElementById('notifBadge');
+            const $notifDropdown = document.getElementById('notifDropdown');
+            const $notifList = document.getElementById('notifList');
+            const $themeIcon = document.getElementById('themeIcon');
+            const $bookingModalEl = document.getElementById('bookingModal');
+            const $whatsappModalEl = document.getElementById('whatsappModal');
+            let bookingModal, whatsappModal;
+
+            // ==================== LOCAL STORAGE ====================
+            function loadBookings() {
+                try {
+                    const raw = localStorage.getItem(STORAGE_KEY);
+                    bookings = raw ? JSON.parse(raw) : [];
+                    if (!Array.isArray(bookings)) bookings = [];
+                } catch (e) {
+                    bookings = [];
+                }
+            }
+
+            function saveBookings() {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(bookings));
+            }
+
+            function loadTheme() {
+                const saved = localStorage.getItem(THEME_KEY);
+                if (saved === 'dark') {
+                    document.body.classList.add('dark-mode');
+                    $themeIcon.className = 'bi bi-sun-fill';
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    $themeIcon.className = 'bi bi-moon-stars';
+                }
+            }
+
+            function saveTheme() {
+                const isDark = document.body.classList.contains('dark-mode');
+                localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
+            }
+
+            // ==================== HELPERS ====================
+            function generateId() {
+                return 'bk_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
+            }
+
+            function formatDate(dateStr) {
+                if (!dateStr) return '—';
+                const d = new Date(dateStr + 'T00:00:00');
+                return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+            }
+
+            function formatCurrency(amount) {
+                return 'MUR ' + parseFloat(amount || 0).toLocaleString('en-US', { minimumFractionDigits: 2,
+                    maximumFractionDigits: 2 });
+            }
+
+            function getTodayStr() {
+                return new Date().toISOString().split('T')[0];
+            }
+
+            function daysBetween(d1, d2) {
+                const a = new Date(d1 + 'T00:00:00');
+                const b = new Date(d2 + 'T00:00:00');
+                return Math.max(0, Math.round((b - a) / (1000 * 60 * 60 * 24)));
+            }
+
+            function datesOverlap(checkIn1, checkOut1, checkIn2, checkOut2) {
+                return checkIn1 < checkOut2 && checkOut1 > checkIn2;
+            }
+
+            function getStatusBadgeClass(status) {
+                const map = {
+                    'Pending': 'bg-warning text-dark',
+                    'Confirmed': 'bg-info text-white',
+                    'Checked-in': 'bg-success text-white',
+                    'Checked-out': 'bg-secondary text-white',
+                    'Cancelled': 'bg-danger text-white'
+                };
+                return map[status] || 'bg-light text-dark';
+            }
+
+            // ==================== TOAST ====================
+            function showToast(message, type = 'info') {
+                const icons = { success: 'bi-check-circle-fill text-success', error: 'bi-exclamation-circle-fill text-danger',
+                    info: 'bi-info-circle-fill text-info', warning: 'bi-exclamation-triangle-fill text-warning' };
+                const toastHTML = `
+                <div class="toast toast-custom align-items-center border-0 mb-2" role="alert" data-bs-delay="3500">
+                    <div class="d-flex">
+                        <div class="toast-body d-flex align-items-center gap-2">
+                            <i class="bi ${icons[type] || icons.info} fs-5"></i> ${message}
+                        </div>
+                        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>`;
+                $toastContainer.insertAdjacentHTML('beforeend', toastHTML);
+                const toastEl = $toastContainer.lastElementChild;
+                const toast = new bootstrap.Toast(toastEl);
+                toast.show();
+                toastEl.addEventListener('hidden.bs.toast', () => toastEl.remove());
+            }
+
+            // ==================== THEME ====================
+            window.toggleTheme = function() {
+                document.body.classList.toggle('dark-mode');
+                const isDark = document.body.classList.contains('dark-mode');
+                $themeIcon.className = isDark ? 'bi bi-sun-fill' : 'bi bi-moon-stars';
+                saveTheme();
+                refreshAllUI();
+            };
+
+            // ==================== NOTIFICATIONS ====================
+            function getNotifications() {
+                const today = getTodayStr();
+                const notifs = [];
+                const todayBookings = bookings.filter(b => b.checkIn === today && b.status !== 'Cancelled' && b
+                    .status !== 'Checked-out');
+                const checkoutToday = bookings.filter(b => b.checkOut === today && b.status === 'Checked-in');
+                const outstanding = bookings.filter(b => parseFloat(b.balance || 0) > 0 && b.status !== 'Cancelled' && b
+                    .status !== 'Checked-out');
+                const upcoming = bookings.filter(b => {
+                    const diff = daysBetween(today, b.checkIn);
+                    return diff > 0 && diff <= 7 && b.status !== 'Cancelled' && b.status !== 'Checked-out';
+                });
+
+                todayBookings.forEach(b => notifs.push({ type: 'checkin', text: `Check-in today: ${b.clientName} - Studio ${b.studioNumber}`,
+                    icon: 'bi-box-arrow-in-right text-warning' }));
+                checkoutToday.forEach(b => notifs.push({ type: 'checkout', text: `Check-out today: ${b.clientName} - Studio ${b.studioNumber}`,
+                    icon: 'bi-box-arrow-right text-info' }));
+                outstanding.forEach(b => notifs.push({ type: 'balance', text: `Outstanding balance: ${b.clientName} - ${formatCurrency(b.balance)}`,
+                    icon: 'bi-cash text-danger' }));
+                upcoming.forEach(b => notifs.push({ type: 'upcoming', text: `Upcoming: ${b.clientName} - Studio ${b.studioNumber} on ${formatDate(b.checkIn)}`,
+                    icon: 'bi-calendar-event text-primary' }));
+                return notifs;
+            }
+
+            function updateNotificationBadge() {
+                const notifs = getNotifications();
+                if (notifs.length > 0) {
+                    $notifBadge.style.display = 'flex';
+                    $notifBadge.textContent = notifs.length;
+                } else {
+                    $notifBadge.style.display = 'none';
+                }
+                renderNotificationList(notifs);
+            }
+
+            function renderNotificationList(notifs) {
+                if (notifs.length === 0) {
+                    $notifList.innerHTML = '<p class="text-muted mb-0 small">No notifications</p>';
+                } else {
+                    $notifList.innerHTML = notifs.map(n =>
+                        `<div class="d-flex align-items-center gap-2 py-1 border-bottom small" style="border-color:var(--border-color)!important;"><i class="bi ${n.icon}"></i> ${n.text}</div>`
+                    ).join('');
+                }
+            }
+
+            window.toggleNotifications = function() {
+                const isVisible = $notifDropdown.style.display === 'block';
+                $notifDropdown.style.display = isVisible ? 'none' : 'block';
+                if (!isVisible) updateNotificationBadge();
+            };
+
+            // Close notifications when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!$notifDropdown.contains(e.target) && e.target !== document.getElementById('notifBell') && !document
+                    .getElementById('notifBell').contains(e.target)) {
+                    $notifDropdown.style.display = 'none';
+                }
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-        // WhatsApp product enquiry — unified to +23057800485
-        function openWhatsApp(product) {
-            const msg = encodeURIComponent(
-                `Hello Cosy & Comfy! I'm interested in your ${product}. Could you please give me more details?`);
-            window.open(`https://wa.me/23057800485?text=${msg}`, '_blank');
-        }
+            // ==================== TAB SWITCHING ====================
+            window.switchTab = function(tabName) {
+                document.querySelectorAll('.tab-pane-custom').forEach(p => p.classList.remove('active'));
+                document.querySelectorAll('.nav-tab-btn').forEach(b => b.classList.remove('active'));
+                const pane = document.getElementById('tab-' + tabName);
+                if (pane) pane.classList.add('active');
+                const btn = document.querySelector(`[data-tab="${tabName}"]`);
+                if (btn) btn.classList.add('active');
+                if (tabName === 'dashboard') renderDashboard();
+                if (tabName === 'studios') renderStudioCards();
+                if (tabName === 'calendar') renderCalendar();
+                if (tabName === 'bookings') renderBookingsTable();
+                if (tabName === 'reports') document.getElementById('reportOutput').innerHTML =
+                    '<p class="text-muted text-center mb-0">Select a report type to generate</p>';
+                $notifDropdown.style.display = 'none';
+            };
 
-        // Form submission → WhatsApp — unified to +23057800485
-        function submitForm(e) {
-            e.preventDefault();
-            const name = document.getElementById('fname').value.trim() + ' ' + document.getElementById('lname').value
-        .trim();
-            const contact = document.getElementById('contact-in').value.trim();
-            const msg = document.getElementById('msg').value.trim();
-            const text = encodeURIComponent(
-                `Hello Cosy & Comfy!\n\nName: ${name}\nContact: ${contact}\nMessage: ${msg}`);
-            window.open(`https://wa.me/23057800485?text=${text}`, '_blank');
-        }
+            // Nav tab click handlers
+            document.getElementById('navTabs').addEventListener('click', function(e) {
+                const btn = e.target.closest('.nav-tab-btn');
+                if (btn) {
+                    const tab = btn.getAttribute('data-tab');
+                    if (tab) switchTab(tab);
+                }
+            });
 
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 60) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+            // ==================== AUTO CALCULATE ====================
+            window.autoCalculate = function() {
+                const checkIn = document.getElementById('checkIn').value;
+                const checkOut = document.getElementById('checkOut').value;
+                const pricePerNight = parseFloat(document.getElementById('pricePerNight').value) || 0;
+                const deposit = parseFloat(document.getElementById('deposit').value) || 0;
+                let nights = 0;
+                if (checkIn && checkOut) {
+                    nights = daysBetween(checkIn, checkOut);
+                }
+                const totalPrice = nights * pricePerNight;
+                const balance = totalPrice - deposit;
+                document.getElementById('nights').value = nights;
+                document.getElementById('totalPrice').value = totalPrice.toFixed(2);
+                document.getElementById('balance').value = balance.toFixed(2);
+            };
+
+            // ==================== BOOKING MODAL ====================
+            window.openBookingModal = function(bookingId = null) {
+                const form = document.getElementById('bookingForm');
+                form.reset();
+                document.getElementById('bookingId').value = '';
+                document.getElementById('bookingModalTitle').innerHTML =
+                    '<i class="bi bi-pencil-square me-2"></i>Add Booking';
+                document.getElementById('nights').value = '';
+                document.getElementById('totalPrice').value = '';
+                document.getElementById('balance').value = '';
+                document.getElementById('adults').value = '1';
+                document.getElementById('children').value = '0';
+                document.getElementById('pricePerNight').value = '0';
+                document.getElementById('deposit').value = '0';
+                document.getElementById('bookingStatus').value = 'Pending';
+                document.getElementById('bookingSource').value = 'Direct';
+
+                if (bookingId) {
+                    const bk = bookings.find(b => b.id === bookingId);
+                    if (bk) {
+                        document.getElementById('bookingId').value = bk.id;
+                        document.getElementById('bookingModalTitle').innerHTML =
+                            '<i class="bi bi-pencil-square me-2"></i>Edit Booking';
+                        populateFormFromBooking(bk);
+                    }
+                }
+                bookingModal.show();
+            };
+
+            function populateFormFromBooking(bk) {
+                document.getElementById('clientName').value = bk.clientName || '';
+                document.getElementById('phone').value = bk.phone || '';
+                document.getElementById('whatsapp').value = bk.whatsapp || '';
+                document.getElementById('email').value = bk.email || '';
+                document.getElementById('nationality').value = bk.nationality || '';
+                document.getElementById('idPassport').value = bk.idPassport || '';
+                document.getElementById('studioNumber').value = bk.studioNumber;
+                document.getElementById('checkIn').value = bk.checkIn;
+                document.getElementById('checkOut').value = bk.checkOut;
+                document.getElementById('adults').value = bk.adults || 1;
+                document.getElementById('children').value = bk.children || 0;
+                document.getElementById('pricePerNight').value = bk.pricePerNight || 0;
+                document.getElementById('deposit').value = bk.deposit || 0;
+                document.getElementById('bookingSource').value = bk.bookingSource || 'Direct';
+                document.getElementById('arrivalTime').value = bk.arrivalTime || '';
+                document.getElementById('departureTime').value = bk.departureTime || '';
+                document.getElementById('vehicleReg').value = bk.vehicleReg || '';
+                document.getElementById('specialRequests').value = bk.specialRequests || '';
+                document.getElementById('internalNotes').value = bk.internalNotes || '';
+                document.getElementById('bookingStatus').value = bk.status || 'Pending';
+                autoCalculate();
             }
-        });
 
-        // Mobile menu toggle (placeholder)
-        function toggleMobileMenu() {
-            const links = document.querySelector('.nav-links');
-            if (links.style.display === 'flex') {
-                links.style.display = 'none';
-            } else {
-                links.style.display = 'flex';
-                links.style.flexDirection = 'column';
-                links.style.position = 'absolute';
-                links.style.top = '100%';
-                links.style.left = '0';
-                links.style.right = '0';
-                links.style.background = 'rgba(247,240,227,0.97)';
-                links.style.backdropFilter = 'blur(16px)';
-                links.style.padding = '20px 32px';
-                links.style.gap = '18px';
-                links.style.borderBottom = '1px solid rgba(62,42,24,0.08)';
-                links.style.boxShadow = '0 12px 32px rgba(62,42,24,0.1)';
+            function getFormData() {
+                return {
+                    id: document.getElementById('bookingId').value || generateId(),
+                    clientName: document.getElementById('clientName').value.trim(),
+                    phone: document.getElementById('phone').value.trim(),
+                    whatsapp: document.getElementById('whatsapp').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    nationality: document.getElementById('nationality').value.trim(),
+                    idPassport: document.getElementById('idPassport').value.trim(),
+                    studioNumber: parseInt(document.getElementById('studioNumber').value) || 0,
+                    checkIn: document.getElementById('checkIn').value,
+                    checkOut: document.getElementById('checkOut').value,
+                    nights: parseInt(document.getElementById('nights').value) || 0,
+                    adults: parseInt(document.getElementById('adults').value) || 1,
+                    children: parseInt(document.getElementById('children').value) || 0,
+                    pricePerNight: parseFloat(document.getElementById('pricePerNight').value) || 0,
+                    totalPrice: parseFloat(document.getElementById('totalPrice').value) || 0,
+                    deposit: parseFloat(document.getElementById('deposit').value) || 0,
+                    balance: parseFloat(document.getElementById('balance').value) || 0,
+                    bookingSource: document.getElementById('bookingSource').value,
+                    arrivalTime: document.getElementById('arrivalTime').value,
+                    departureTime: document.getElementById('departureTime').value,
+                    vehicleReg: document.getElementById('vehicleReg').value.trim(),
+                    specialRequests: document.getElementById('specialRequests').value.trim(),
+                    internalNotes: document.getElementById('internalNotes').value.trim(),
+                    status: document.getElementById('bookingStatus').value,
+                    createdAt: new Date().toISOString(),
+                };
             }
-        }
+
+            window.saveBooking = function() {
+                const data = getFormData();
+                // Validate
+                if (!data.clientName) return showToast('Client full name is required.', 'error');
+                if (!data.phone) return showToast('Phone number is required.', 'error');
+                if (!data.studioNumber || data.studioNumber < 1 || data.studioNumber > 9) return showToast(
+                    'Please select a valid studio.', 'error');
+                if (!data.checkIn || !data.checkOut) return showToast('Check-in and check-out dates are required.',
+                    'error');
+                if (data.checkOut <= data.checkIn) return showToast('Check-out date must be after check-in date.',
+                'error');
+
+                // Check for overlapping bookings (same studio, active statuses)
+                const existingId = document.getElementById('bookingId').value;
+                const overlap = bookings.find(b => {
+                    if (b.id === existingId) return false;
+                    if (b.studioNumber !== data.studioNumber) return false;
+                    if (b.status === 'Cancelled' || b.status === 'Checked-out') return false;
+                    return datesOverlap(data.checkIn, data.checkOut, b.checkIn, b.checkOut);
+                });
+                if (overlap) {
+                    return showToast(
+                        `Studio ${data.studioNumber} is already booked for these dates (${overlap.clientName}).`, 'error');
+                }
+
+                // Save
+                const existingIndex = bookings.findIndex(b => b.id === existingId);
+                if (existingIndex >= 0) {
+                    data.createdAt = bookings[existingIndex].createdAt || data.createdAt;
+                    bookings[existingIndex] = data;
+                    showToast('Booking updated successfully!', 'success');
+                } else {
+                    bookings.push(data);
+                    showToast('Booking added successfully!', 'success');
+                }
+                saveBookings();
+                bookingModal.hide();
+                refreshAllUI();
+            };
+
+            window.deleteBooking = function(bookingId) {
+                const bk = bookings.find(b => b.id === bookingId);
+                if (!bk) return;
+                if (!confirm(
+                        `Are you sure you want to delete the booking for "${bk.clientName}" (Studio ${bk.studioNumber})? This cannot be undone.`
+                        )) return;
+                bookings = bookings.filter(b => b.id !== bookingId);
+                saveBookings();
+                showToast('Booking deleted.', 'info');
+                refreshAllUI();
+            };
+
+            window.duplicateBooking = function(bookingId) {
+                const bk = bookings.find(b => b.id === bookingId);
+                if (!bk) return;
+                const newBooking = { ...bk, id: generateId(), clientName: bk.clientName + ' (Copy)', checkIn: '', checkOut: '',
+                    nights: 0, totalPrice: 0, balance: 0, deposit: 0, createdAt: new Date().toISOString(),
+                    status: 'Pending' };
+                bookings.push(newBooking);
+                saveBookings();
+                showToast('Booking duplicated. Please edit the dates.', 'success');
+                openBookingModal(newBooking.id);
+                refreshAllUI();
+            };
+
+            // ==================== WHATSAPP ====================
+            window.generateWhatsAppMessage = function(bookingId) {
+                const bk = bookings.find(b => b.id === bookingId);
+                if (!bk) return;
+                currentWhatsAppBookingId = bookingId;
+                const msg = `🏠 *NEW BOOKING*\n\n` +
+                    `*Client:* ${bk.clientName}\n` +
+                    `*Phone:* ${bk.phone}\n` +
+                    `*Studio:* ${bk.studioNumber}\n` +
+                    `*Check-in:* ${formatDate(bk.checkIn)}\n` +
+                    `*Check-out:* ${formatDate(bk.checkOut)}\n` +
+                    `*Nights:* ${bk.nights}\n` +
+                    `*Adults:* ${bk.adults}\n` +
+                    `*Children:* ${bk.children}\n` +
+                    `*Total Price:* ${formatCurrency(bk.totalPrice)}\n` +
+                    `*Deposit:* ${formatCurrency(bk.deposit)}\n` +
+                    `*Balance:* ${formatCurrency(bk.balance)}\n` +
+                    `*Arrival Time:* ${bk.arrivalTime || 'N/A'}\n` +
+                    `*Booking Source:* ${bk.bookingSource}\n` +
+                    `*Notes:* ${bk.specialRequests || 'None'}\n\n` +
+                    `Thank you.`;
+                document.getElementById('whatsappMessage').value = msg;
+                whatsappModal.show();
+            };
+
+            window.openWhatsApp = function() {
+                const bk = bookings.find(b => b.id === currentWhatsAppBookingId);
+                if (!bk) return;
+                const phone = (bk.whatsapp || bk.phone || '').replace(/[^0-9+]/g, '');
+                if (!phone) return showToast('No WhatsApp/phone number available for this booking.', 'warning');
+                const msg = document.getElementById('whatsappMessage').value;
+                const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+                window.open(url, '_blank');
+            };
+
+            window.copyWhatsAppMessage = function() {
+                const msg = document.getElementById('whatsappMessage').value;
+                navigator.clipboard.writeText(msg).then(() => {
+                    showToast('Message copied to clipboard!', 'success');
+                }).catch(() => {
+                    document.getElementById('whatsappMessage').select();
+                    document.execCommand('copy');
+                    showToast('Message copied!', 'success');
+                });
+            };
+
+            // ==================== CSV ====================
+            window.exportCSV = function() {
+                if (bookings.length === 0) return showToast('No bookings to export.', 'warning');
+                const headers = ['ID', 'Client Name', 'Phone', 'WhatsApp', 'Email', 'Nationality', 'ID/Passport',
+                    'Studio', 'Check-in', 'Check-out', 'Nights', 'Adults', 'Children', 'Price/Night',
+                    'Total Price', 'Deposit', 'Balance', 'Source', 'Arrival Time', 'Departure Time',
+                    'Vehicle Reg', 'Special Requests', 'Internal Notes', 'Status', 'Created At'
+                ];
+                const rows = bookings.map(b => [
+                    b.id, b.clientName, b.phone, b.whatsapp, b.email, b.nationality, b.idPassport,
+                    b.studioNumber, b.checkIn, b.checkOut, b.nights, b.adults, b.children,
+                    b.pricePerNight, b.totalPrice, b.deposit, b.balance, b.bookingSource,
+                    b.arrivalTime, b.departureTime, b.vehicleReg, b.specialRequests, b.internalNotes,
+                    b.status, b.createdAt
+                ]);
+                const csvContent = [headers, ...rows].map(row =>
+                    row.map(cell => '"' + String(cell || '').replace(/"/g, '""') + '"').join(',')
+                ).join('\n');
+                const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'studio_bookings_' + getTodayStr() + '.csv';
+                a.click();
+                URL.revokeObjectURL(url);
+                showToast('Bookings exported to CSV!', 'success');
+            };
+
+            window.importCSV = function(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const text = e.target.result;
+                        const lines = text.split('\n').filter(l => l.trim());
+                        if (lines.length < 2) return showToast('CSV file is empty or has no data rows.',
+                        'error');
+                        const headers = lines[0].split(',').map(h => h.replace(/^"|"$/g, '').trim()
+                    .toLowerCase());
+                        let imported = 0;
+                        for (let i = 1; i < lines.length; i++) {
+                            const cells = parseCSVLine(lines[i]);
+                            if (cells.length < 10) continue;
+                            const row = {};
+                            headers.forEach((h, idx) => { row[h] = cells[idx] || ''; });
+                            const booking = {
+                                id: row['id'] || generateId(),
+                                clientName: row['client name'] || row['clientname'] || '',
+                                phone: row['phone'] || '',
+                                whatsapp: row['whatsapp'] || '',
+                                email: row['email'] || '',
+                                nationality: row['nationality'] || '',
+                                idPassport: row['id/passport'] || row['idpassport'] || '',
+                                studioNumber: parseInt(row['studio']) || 1,
+                                checkIn: row['check-in'] || row['checkin'] || '',
+                                checkOut: row['check-out'] || row['checkout'] || '',
+                                nights: parseInt(row['nights']) || 0,
+                                adults: parseInt(row['adults']) || 1,
+                                children: parseInt(row['children']) || 0,
+                                pricePerNight: parseFloat(row['price/night'] || row['pricenight']) || 0,
+                                totalPrice: parseFloat(row['total price'] || row['totalprice']) || 0,
+                                deposit: parseFloat(row['deposit']) || 0,
+                                balance: parseFloat(row['balance']) || 0,
+                                bookingSource: row['source'] || 'Direct',
+                                arrivalTime: row['arrival time'] || row['arrivaltime'] || '',
+                                departureTime: row['departure time'] || row['departuretime'] || '',
+                                vehicleReg: row['vehicle reg'] || row['vehiclereg'] || '',
+                                specialRequests: row['special requests'] || row['specialrequests'] || '',
+                                internalNotes: row['internal notes'] || row['internalnotes'] || '',
+                                status: row['status'] || 'Pending',
+                                createdAt: row['created at'] || row['createdat'] || new Date()
+                                    .toISOString(),
+                            };
+                            if (booking.clientName && booking.checkIn && booking.checkOut) {
+                                const exists = bookings.find(b => b.id === booking.id);
+                                if (!exists) {
+                                    bookings.push(booking);
+                                    imported++;
+                                }
+                            }
+                        }
+                        saveBookings();
+                        showToast(`Imported ${imported} booking(s) successfully!`, 'success');
+                        refreshAllUI();
+                    } catch (err) {
+                        showToast('Error parsing CSV file: ' + err.message, 'error');
+                    }
+                };
+                reader.readAsText(file, 'UTF-8');
+                event.target.value = '';
+            };
+
+            function parseCSVLine(line) {
+                const result = [];
+                let current = '';
+                let inQuotes = false;
+                for (let i = 0; i < line.length; i++) {
+                    const ch = line[i];
+                    if (inQuotes) {
+                        if (ch === '"' && i + 1 < line.length && line[i + 1] === '"') {
+                            current += '"';
+                            i++;
+                        } else if (ch === '"') {
+                            inQuotes = false;
+                        } else {
+                            current += ch;
+                        }
+                    } else {
+                        if (ch === '"') {
+                            inQuotes = true;
+                        } else if (ch === ',') {
+                            result.push(current.trim());
+                            current = '';
+                        } else {
+                            current += ch;
+                        }
+                    }
+                }
+                result.push(current.trim());
+                return result;
+            }
+
+            // ==================== PRINT ====================
+            window.printBookings = function() {
+                window.print();
+            };
+
+            // ==================== RENDER: DASHBOARD ====================
+            function renderDashboard() {
+                const today = getTodayStr();
+                const now = new Date();
+                const currentMonth = now.getMonth();
+                const currentYear = now.getFullYear();
+
+                const activeBookings = bookings.filter(b => b.status !== 'Cancelled' && b.status !== 'Checked-out');
+                const occupiedStudios = new Set(activeBookings.filter(b => b.status === 'Checked-in' && b.checkIn <=
+                    today && b.checkOut > today).map(b => b.studioNumber));
+                const arrivingToday = activeBookings.filter(b => b.checkIn === today);
+                const departingToday = bookings.filter(b => b.checkOut === today && b.status === 'Checked-in');
+                const allActiveStudioNums = new Set(activeBookings.filter(b => b.checkIn <= today && b.checkOut > today).map(
+                    b => b.studioNumber));
+                const availableCount = TOTAL_STUDIOS - allActiveStudioNums.size;
+
+                const monthlyRevenue = bookings
+                    .filter(b => {
+                        const bDate = new Date(b.checkIn + 'T00:00:00');
+                        return bDate.getMonth() === currentMonth && bDate.getFullYear() === currentYear && b
+                            .status !== 'Cancelled';
+                    })
+                    .reduce((sum, b) => sum + parseFloat(b.totalPrice || 0), 0);
+
+                const totalBookings = bookings.length;
+
+                const stats = [
+                    { icon: 'bi-buildings icon-blue', value: TOTAL_STUDIOS, label: 'Total Studios' },
+                    { icon: 'bi-check-circle icon-green', value: availableCount, label: 'Available Studios' },
+                    { icon: 'bi-x-circle icon-red', value: occupiedStudios.size, label: 'Occupied Studios' },
+                    { icon: 'bi-box-arrow-in-right icon-orange', value: arrivingToday.length,
+                        label: "Today's Check-ins" },
+                    { icon: 'bi-box-arrow-right icon-blue', value: departingToday.length,
+                    label: "Today's Check-outs" },
+                    { icon: 'bi-cash-stack icon-teal', value: formatCurrency(monthlyRevenue),
+                        label: 'Monthly Revenue' },
+                    { icon: 'bi-calendar-check icon-purple', value: totalBookings, label: 'Total Bookings' },
+                ];
+
+                document.getElementById('dashboardStats').innerHTML = stats.map(s => `
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="stat-card">
+                            <div class="stat-icon ${s.icon.split(' ')[1] || 'icon-blue'}"><i class="bi ${s.icon.split(' ')[0]}"></i></div>
+                            <div class="stat-value">${s.value}</div>
+                            <div class="stat-label">${s.label}</div>
+                        </div>
+                    </div>
+                `).join('');
+
+                // Recent bookings table
+                const recent = [...bookings].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 10);
+                const tbody = document.querySelector('#dashboardRecentTable tbody');
+                tbody.innerHTML = recent.length === 0 ?
+                    '<tr><td colspan="6" class="text-center text-muted py-3">No bookings yet.</td></tr>' :
+                    recent.map(b => `
+                        <tr>
+                            <td><strong>${escapeHTML(b.clientName)}</strong></td>
+                            <td>Studio ${b.studioNumber}</td>
+                            <td>${formatDate(b.checkIn)}</td>
+                            <td>${formatDate(b.checkOut)}</td>
+                            <td><span class="badge ${getStatusBadgeClass(b.status)}">${b.status}</span></td>
+                            <td class="${parseFloat(b.balance) > 0 ? 'text-danger fw-semibold' : 'text-success'}">${formatCurrency(b.balance)}</td>
+                        </tr>
+                    `).join('');
+            }
+
+            function escapeHTML(str) {
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            // ==================== RENDER: BOOKINGS TABLE ====================
+            window.renderBookingsTable = function() {
+                const searchTerm = (document.getElementById('bookingSearch').value || '').toLowerCase();
+                const filterStudio = document.getElementById('filterStudio').value;
+                const filterStatus = document.getElementById('filterStatus').value;
+                const filterDate = document.getElementById('filterDate').value;
+
+                let filtered = [...bookings];
+                if (searchTerm) {
+                    filtered = filtered.filter(b =>
+                        b.clientName.toLowerCase().includes(searchTerm) ||
+                        b.phone.includes(searchTerm) ||
+                        b.email.toLowerCase().includes(searchTerm) ||
+                        String(b.studioNumber).includes(searchTerm)
+                    );
+                }
+                if (filterStudio) filtered = filtered.filter(b => b.studioNumber === parseInt(filterStudio));
+                if (filterStatus) filtered = filtered.filter(b => b.status === filterStatus);
+                if (filterDate) filtered = filtered.filter(b => b.checkIn === filterDate);
+
+                filtered.sort((a, b) => new Date(b.checkIn) - new Date(a.checkIn));
+
+                const tbody = document.querySelector('#bookingsTable tbody');
+                const noMsg = document.getElementById('noBookingsMsg');
+                if (filtered.length === 0) {
+                    tbody.innerHTML = '';
+                    noMsg.style.display = 'block';
+                } else {
+                    noMsg.style.display = 'none';
+                    tbody.innerHTML = filtered.map(b => `
+                        <tr>
+                            <td><strong>${escapeHTML(b.clientName)}</strong><br><small class="text-muted">${escapeHTML(b.phone)}</small></td>
+                            <td>Studio ${b.studioNumber}</td>
+                            <td>${formatDate(b.checkIn)}</td>
+                            <td>${formatDate(b.checkOut)}</td>
+                            <td>${b.nights}</td>
+                            <td>${formatCurrency(b.totalPrice)}</td>
+                            <td>${formatCurrency(b.deposit)}</td>
+                            <td class="${parseFloat(b.balance) > 0 ? 'text-danger fw-semibold' : 'text-success'}">${formatCurrency(b.balance)}</td>
+                            <td><span class="badge ${getStatusBadgeClass(b.status)}">${b.status}</span></td>
+                            <td><small>${b.bookingSource}</small></td>
+                            <td>
+                                <div class="d-flex gap-1 flex-wrap">
+                                    <button class="btn btn-outline-info btn-custom-sm" title="WhatsApp" onclick="generateWhatsAppMessage('${b.id}')"><i class="bi bi-whatsapp"></i></button>
+                                    <button class="btn btn-outline-primary btn-custom-sm" title="Edit" onclick="openBookingModal('${b.id}')"><i class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-outline-secondary btn-custom-sm" title="Duplicate" onclick="duplicateBooking('${b.id}')"><i class="bi bi-files"></i></button>
+                                    <button class="btn btn-outline-danger btn-custom-sm" title="Delete" onclick="deleteBooking('${b.id}')"><i class="bi bi-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    `).join('');
+                }
+            };
+
+            // ==================== RENDER: STUDIO CARDS ====================
+            function renderStudioCards() {
+                const today = getTodayStr();
+                const container = document.getElementById('studioCardsContainer');
+                let html = '';
+                for (let s = 1; s <= TOTAL_STUDIOS; s++) {
+                    const activeBk = bookings.find(b =>
+                        b.studioNumber === s &&
+                        b.status !== 'Cancelled' &&
+                        b.status !== 'Checked-out' &&
+                        b.checkIn <= today &&
+                        b.checkOut > today
+                    );
+                    const arrivingBk = bookings.find(b =>
+                        b.studioNumber === s &&
+                        b.checkIn === today &&
+                        b.status !== 'Cancelled' &&
+                        b.status !== 'Checked-out' &&
+                        !(b.checkIn <= today && b.checkOut > today && b.status === 'Checked-in')
+                    );
+                    const departingBk = bookings.find(b =>
+                        b.studioNumber === s &&
+                        b.checkOut === today &&
+                        b.status === 'Checked-in'
+                    );
+
+                    let cardClass = 'available';
+                    let statusText = 'Available';
+                    let badgeClass = 'badge-available';
+                    let guestInfo = '—';
+                    let checkInInfo = '—';
+                    let checkOutInfo = '—';
+                    let nightsInfo = '—';
+                    let balanceInfo = '—';
+                    let bookingIdRef = null;
+
+                    if (activeBk && activeBk.status === 'Checked-in') {
+                        cardClass = 'occupied';
+                        statusText = 'Occupied';
+                        badgeClass = 'badge-occupied';
+                        guestInfo = activeBk.clientName;
+                        checkInInfo = formatDate(activeBk.checkIn);
+                        checkOutInfo = formatDate(activeBk.checkOut);
+                        nightsInfo = activeBk.nights;
+                        balanceInfo = formatCurrency(activeBk.balance);
+                        bookingIdRef = activeBk.id;
+                    } else if (departingBk) {
+                        cardClass = 'departing';
+                        statusText = 'Departing Today';
+                        badgeClass = 'badge-departing';
+                        guestInfo = departingBk.clientName;
+                        checkInInfo = formatDate(departingBk.checkIn);
+                        checkOutInfo = formatDate(departingBk.checkOut);
+                        nightsInfo = departingBk.nights;
+                        balanceInfo = formatCurrency(departingBk.balance);
+                        bookingIdRef = departingBk.id;
+                    } else if (arrivingBk) {
+                        cardClass = 'arriving';
+                        statusText = 'Arriving Today';
+                        badgeClass = 'badge-arriving';
+                        guestInfo = arrivingBk.clientName;
+                        checkInInfo = formatDate(arrivingBk.checkIn);
+                        checkOutInfo = formatDate(arrivingBk.checkOut);
+                        nightsInfo = arrivingBk.nights;
+                        balanceInfo = formatCurrency(arrivingBk.balance);
+                        bookingIdRef = arrivingBk.id;
+                    } else if (activeBk) {
+                        cardClass = 'occupied';
+                        statusText = activeBk.status;
+                        badgeClass = 'badge-occupied';
+                        guestInfo = activeBk.clientName;
+                        checkInInfo = formatDate(activeBk.checkIn);
+                        checkOutInfo = formatDate(activeBk.checkOut);
+                        nightsInfo = activeBk.nights;
+                        balanceInfo = formatCurrency(activeBk.balance);
+                        bookingIdRef = activeBk.id;
+                    }
+
+                    html += `
+                        <div class="col-6 col-md-4 col-lg-4">
+                            <div class="studio-card ${cardClass}" onclick="${bookingIdRef ? `openBookingModal('${bookingIdRef}')` : `openBookingModal()`}">
+                                <div class="studio-number">${s}</div>
+                                <span class="studio-status-badge ${badgeClass}">${statusText}</span>
+                                <div class="mt-2 small">
+                                    <div><strong>Guest:</strong> ${escapeHTML(guestInfo)}</div>
+                                    <div><strong>Check-in:</strong> ${checkInInfo}</div>
+                                    <div><strong>Check-out:</strong> ${checkOutInfo}</div>
+                                    <div><strong>Nights:</strong> ${nightsInfo}</div>
+                                    <div><strong>Balance:</strong> ${balanceInfo}</div>
+                                </div>
+                            </div>
+                        </div>`;
+                }
+                container.innerHTML = html;
+            }
+
+            // ==================== RENDER: CALENDAR ====================
+            function renderCalendar(year, month) {
+                if (year === undefined) {
+                    const now = new Date();
+                    calendarYear = now.getFullYear();
+                    calendarMonth = now.getMonth();
+                } else {
+                    calendarYear = year;
+                    calendarMonth = month;
+                }
+                document.getElementById('calendarMonthLabel').textContent =
+                    MONTH_NAMES[calendarMonth] + ' ' + calendarYear;
+
+                const firstDay = new Date(calendarYear, calendarMonth, 1).getDay();
+                const daysInMonth = new Date(calendarYear, calendarMonth + 1, 0).getDate();
+                const daysInPrevMonth = new Date(calendarYear, calendarMonth, 0).getDate();
+                const today = getTodayStr();
+
+                const grid = document.getElementById('calendarGrid');
+                let html = '';
+                DAY_NAMES.forEach(d => { html +=
+                        `<div class="calendar-day-header">${d}</div>`; });
+
+                // Previous month days
+                for (let i = firstDay - 1; i >= 0; i--) {
+                    const d = daysInPrevMonth - i;
+                    const dateStr = `${calendarYear}-${String(calendarMonth === 0 ? 12 : calendarMonth).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+                    const actualYear = calendarMonth === 0 ? calendarYear - 1 : calendarYear;
+                    const actualMonth = calendarMonth === 0 ? 12 : calendarMonth;
+                    const fullDateStr =
+                        `${actualYear}-${String(actualMonth).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+                    html +=
+                        `<div class="calendar-day other-month" data-date="${fullDateStr}">${d}${getDotIndicators(fullDateStr)}</div>`;
+                }
+
+                // Current month days
+                for (let d = 1; d <= daysInMonth; d++) {
+                    const dateStr =
+                        `${calendarYear}-${String(calendarMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+                    const isToday = dateStr === today;
+                    html +=
+                        `<div class="calendar-day${isToday ? ' today' : ''}" data-date="${dateStr}" onclick="showDayDetails('${dateStr}')">${d}${getDotIndicators(dateStr)}</div>`;
+                }
+
+                // Next month days
+                const remaining = 42 - (firstDay + daysInMonth);
+                for (let d = 1; d <= remaining; d++) {
+                    const actualMonth = calendarMonth === 11 ? 1 : calendarMonth + 2;
+                    const actualYear = calendarMonth === 11 ? calendarYear + 1 : calendarYear;
+                    const fullDateStr =
+                        `${actualYear}-${String(actualMonth).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+                    html +=
+                        `<div class="calendar-day other-month" data-date="${fullDateStr}">${d}${getDotIndicators(fullDateStr)}</div>`;
+                }
+
+                grid.innerHTML = html;
+            }
+
+            function getDotIndicators(dateStr) {
+                const dayBookings = bookings.filter(b =>
+                    b.checkIn <= dateStr && b.checkOut > dateStr && b.status !== 'Cancelled'
+                );
+                if (dayBookings.length === 0) return '';
+                const uniqueStatuses = [...new Set(dayBookings.map(b => b.status))];
+                return '<div class="d-flex gap-1 justify-content-center" style="position:absolute;bottom:4px;">' +
+                    uniqueStatuses.map(s => {
+                        const dotClass = s === 'Pending' ? 'dot-pending' : s === 'Confirmed' ? 'dot-confirmed' :
+                            s === 'Checked-in' ? 'dot-checked-in' : s === 'Checked-out' ? 'dot-checked-out' :
+                            'dot-cancelled';
+                        return `<span class="booking-dot ${dotClass}"></span>`;
+                    }).join('') + '</div>';
+            }
+
+            window.showDayDetails = function(dateStr) {
+                const dayBookings = bookings.filter(b =>
+                    b.checkIn <= dateStr && b.checkOut > dateStr && b.status !== 'Cancelled'
+                );
+                const container = document.getElementById('calendarDayDetails');
+                if (dayBookings.length === 0) {
+                    container.innerHTML =
+                        `<p class="text-muted mb-0 text-center">No bookings for ${formatDate(dateStr)}</p>`;
+                } else {
+                    container.innerHTML = `<h6 class="fw-semibold">Bookings for ${formatDate(dateStr)}</h6>` +
+                        dayBookings.map(b => `
+                            <div class="d-flex justify-content-between align-items-center py-1 border-bottom small" style="border-color:var(--border-color)!important;cursor:pointer;" onclick="openBookingModal('${b.id}')">
+                                <span><strong>${escapeHTML(b.clientName)}</strong> - Studio ${b.studioNumber}</span>
+                                <span class="badge ${getStatusBadgeClass(b.status)}">${b.status}</span>
+                            </div>
+                        `).join('');
+                }
+            };
+
+            window.navigateCalendar = function(offset) {
+                if (offset === 0) {
+                    const now = new Date();
+                    calendarYear = now.getFullYear();
+                    calendarMonth = now.getMonth();
+                } else {
+                    calendarMonth += offset;
+                    if (calendarMonth > 11) { calendarMonth = 0;
+                        calendarYear++; }
+                    if (calendarMonth < 0) { calendarMonth = 11;
+                        calendarYear--; }
+                }
+                renderCalendar(calendarYear, calendarMonth);
+            };
+
+            // ==================== REPORTS ====================
+            window.generateReport = function(type) {
+                const today = getTodayStr();
+                const now = new Date();
+                const container = document.getElementById('reportOutput');
+                let html = '';
+                let filtered = [];
+
+                switch (type) {
+                    case 'daily':
+                        filtered = bookings.filter(b => b.checkIn === today && b.status !== 'Cancelled');
+                        html = `<h6>Daily Report - ${formatDate(today)}</h6>
+                                <p>Check-ins today: <strong>${filtered.length}</strong></p>
+                                <p>Total Revenue: <strong>${formatCurrency(filtered.reduce((s,b)=>s+parseFloat(b.totalPrice||0),0))}</strong></p>`;
+                        break;
+                    case 'weekly':
+                        const weekStart = new Date(now);
+                        weekStart.setDate(now.getDate() - now.getDay());
+                        const weekStartStr = weekStart.toISOString().split('T')[0];
+                        const weekEnd = new Date(weekStart);
+                        weekEnd.setDate(weekStart.getDate() + 6);
+                        const weekEndStr = weekEnd.toISOString().split('T')[0];
+                        filtered = bookings.filter(b => b.checkIn >= weekStartStr && b.checkIn <= weekEndStr && b
+                            .status !== 'Cancelled');
+                        html =
+                            `<h6>Weekly Report (${formatDate(weekStartStr)} - ${formatDate(weekEndStr)})</h6>
+                                <p>Bookings: <strong>${filtered.length}</strong></p>
+                                <p>Revenue: <strong>${formatCurrency(filtered.reduce((s,b)=>s+parseFloat(b.totalPrice||0),0))}</strong></p>`;
+                        break;
+                    case 'monthly':
+                        filtered = bookings.filter(b => {
+                            const d = new Date(b.checkIn + 'T00:00:00');
+                            return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear() &&
+                                b.status !== 'Cancelled';
+                        });
+                        html =
+                            `<h6>Monthly Report - ${MONTH_NAMES[now.getMonth()]} ${now.getFullYear()}</h6>
+                                <p>Bookings: <strong>${filtered.length}</strong></p>
+                                <p>Revenue: <strong>${formatCurrency(filtered.reduce((s,b)=>s+parseFloat(b.totalPrice||0),0))}</strong></p>
+                                <p>Avg per Booking: <strong>${filtered.length>0?formatCurrency(filtered.reduce((s,b)=>s+parseFloat(b.totalPrice||0),0)/filtered.length):'N/A'}</strong></p>`;
+                        break;
+                    case 'revenue':
+                        const monthlyData = [];
+                        for (let m = 0; m < 12; m++) {
+                            const monthBks = bookings.filter(b => {
+                                const d = new Date(b.checkIn + 'T00:00:00');
+                                return d.getMonth() === m && d.getFullYear() === now.getFullYear() && b
+                                    .status !== 'Cancelled';
+                            });
+                            monthlyData.push({
+                                month: MONTH_NAMES[m],
+                                count: monthBks.length,
+                                revenue: monthBks.reduce((s, b) => s + parseFloat(b.totalPrice || 0),
+                                0)
+                            });
+                        }
+                        html =
+                            `<h6>Revenue Report - ${now.getFullYear()}</h6>
+                                <table class="table table-sm table-custom"><thead><tr><th>Month</th><th>Bookings</th><th>Revenue</th></tr></thead><tbody>` +
+                            monthlyData.map(d =>
+                                `<tr><td>${d.month}</td><td>${d.count}</td><td>${formatCurrency(d.revenue)}</td></tr>`
+                                ).join('') + `</tbody></table>
+                                <p class="fw-bold">Total Annual Revenue: ${formatCurrency(monthlyData.reduce((s,d)=>s+d.revenue,0))}</p>`;
+                        break;
+                    case 'occupancy':
+                        const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+                        let occupiedDays = 0;
+                        for (let d = 1; d <= daysInMonth; d++) {
+                            const dateStr =
+                                `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+                            const occupied = new Set(bookings.filter(b =>
+                                b.checkIn <= dateStr && b.checkOut > dateStr && b.status !== 'Cancelled' && b
+                                .status !== 'Checked-out'
+                            ).map(b => b.studioNumber)).size;
+                            occupiedDays += occupied;
+                        }
+                        const totalPossible = daysInMonth * TOTAL_STUDIOS;
+                        const occupancyRate = totalPossible > 0 ? (occupiedDays / totalPossible * 100) : 0;
+                        html =
+                            `<h6>Occupancy Report - ${MONTH_NAMES[now.getMonth()]} ${now.getFullYear()}</h6>
+                                <p>Total Studio-Days: <strong>${totalPossible}</strong></p>
+                                <p>Occupied Studio-Days: <strong>${occupiedDays}</strong></p>
+                                <p>Occupancy Rate: <strong>${occupancyRate.toFixed(1)}%</strong></p>
+                                <div class="progress" style="height:20px;"><div class="progress-bar bg-info" style="width:${occupancyRate}%;">${occupancyRate.toFixed(1)}%</div></div>`;
+                        break;
+                }
+                if (filtered.length > 0 && ['daily', 'weekly', 'monthly'].includes(type)) {
+                    html +=
+                        `<table class="table table-sm table-custom mt-2"><thead><tr><th>Client</th><th>Studio</th><th>Total</th><th>Status</th></tr></thead><tbody>` +
+                        filtered.map(b =>
+                            `<tr><td>${escapeHTML(b.clientName)}</td><td>Studio ${b.studioNumber}</td><td>${formatCurrency(b.totalPrice)}</td><td><span class="badge ${getStatusBadgeClass(b.status)}">${b.status}</span></td></tr>`
+                            ).join('') + `</tbody></table>`;
+                }
+                container.innerHTML = html;
+            };
+
+            // ==================== REFRESH ALL ====================
+            function refreshAllUI() {
+                const activeTab = document.querySelector('.tab-pane-custom.active');
+                if (activeTab) {
+                    const tabId = activeTab.id;
+                    if (tabId === 'tab-dashboard') renderDashboard();
+                    if (tabId === 'tab-bookings') renderBookingsTable();
+                    if (tabId === 'tab-studios') renderStudioCards();
+                    if (tabId === 'tab-calendar') renderCalendar();
+                }
+                updateNotificationBadge();
+            }
+
+            // ==================== INITIALIZATION ====================
+            function init() {
+                loadBookings();
+                loadTheme();
+                bookingModal = new bootstrap.Modal($bookingModalEl);
+                whatsappModal = new bootstrap.Modal($whatsappModalEl);
+
+                // Set today as default for date filter
+                document.getElementById('filterDate').value = '';
+
+                // Initial render
+                renderDashboard();
+                renderBookingsTable();
+                renderStudioCards();
+                renderCalendar();
+                updateNotificationBadge();
+
+                // Hide spinner
+                setTimeout(() => {
+                    $spinner.classList.add('hidden');
+                    setTimeout(() => $spinner.remove(), 500);
+                }, 400);
+
+                // Refresh notifications every 60 seconds
+                setInterval(updateNotificationBadge, 60000);
+
+                // Auto-save on page unload
+                window.addEventListener('beforeunload', () => saveBookings());
+            }
+
+            // Start the app
+            init();
+        })();
     </script>
 </body>
 </html>
